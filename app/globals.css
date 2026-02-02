@@ -4,6 +4,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans:
+    var(--font-montserrat), var(--font-cairo), ui-sans-serif, system-ui,
+    sans-serif;
+  --font-cairo: var(--font-cairo), ui-sans-serif, system-ui, sans-serif;
+  --font-montserrat:
+    var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -48,7 +54,7 @@
 
 :root {
   --radius: 0.65rem;
-  --background: oklch(1 0 0);
+  --background: #ffffff;
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -83,7 +89,7 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: #000000;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -122,14 +128,5 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-}
-@layer base {
-  :root {
-    --font-poppins: 'Poppins', sans-serif;
-  }
-
-  body {
-    font-family: var(--font-poppins);
   }
 }

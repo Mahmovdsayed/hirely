@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/providers/Providers";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-montserrat',
 });
 
 export const metadata: Metadata = {
@@ -20,11 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
-      <body
-        className={`${poppins.variable} antialiased`}
-      >
-        {children}
+    <html suppressHydrationWarning dir="ltr" lang="en" className="light">
+      <body className={`${montserrat.variable} antialiased overflow-x-hidden font-montserrat`}>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
