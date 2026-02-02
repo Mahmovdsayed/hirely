@@ -1,15 +1,18 @@
 'use client'
+import Silk from "@/components/sections/Silk";
+import { ReactNode } from "react";
 
-import SignInForm from "@/components/forms/auth/SignInForm";
-import Silk from "@/components/Silk";
+interface AuthLayoutProps {
+    children: ReactNode;
+}
 
-const SignInPage = () => {
-    return <>
+export default function AuthLayout({ children }: AuthLayoutProps) {
+    return (
         <div className="grid min-h-svh lg:grid-cols-2">
             <div className="flex flex-col ">
                 <div className="flex flex-1 items-center justify-center">
                     <div className="w-full lg:max-w-xl">
-                        <SignInForm />
+                        {children}
                     </div>
                 </div>
             </div>
@@ -23,7 +26,5 @@ const SignInPage = () => {
                 />
             </div>
         </div>
-    </>;
-};
-
-export default SignInPage;
+    );
+}

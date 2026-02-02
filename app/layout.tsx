@@ -10,8 +10,12 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Hirely - AI-Powered Freelance and Portfolio Platform",
+  title: {
+    default: 'Hirely - AI-Powered Freelance and Portfolio Platform',
+    template: '%s | Hirely',
+  },
   description: "AI-Powered Freelance and Portfolio Platform for freelancers and portfolio builders",
+
 };
 
 export default function RootLayout({

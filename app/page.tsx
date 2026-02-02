@@ -1,8 +1,7 @@
-import SignInPage from "@/components/pages/auth/SignInPage";
 
-const page = async () => {
+const page = () => {
   return <>
-    <SignInPage />
+    <h1>Welcome to Hirely</h1>
   </>;
 };
 

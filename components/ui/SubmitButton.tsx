@@ -14,7 +14,7 @@ const SubmitButton = ({ title, isLoading, icon, className, variant = 'default', 
     return <>
         <Button
             disabled={isLoading}
-            className={`w-full font-semibold rounded-full ${className || ''}`}
+            className={`w-full font-semibold rounded-full cursor-pointer ${className || ''}`}
             variant={variant}
             type="submit"
             size={size}
