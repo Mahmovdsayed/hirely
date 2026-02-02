@@ -17,7 +17,7 @@ const SignInPage = () => {
                 <Silk
                     speed={5}
                     scale={1}
-                    color="#7B7481"
+                    color="#2563EB"
                     noiseIntensity={1.5}
                     rotation={0}
                 />
