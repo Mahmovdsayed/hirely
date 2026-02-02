@@ -1,5 +1,4 @@
-'use client'
-import Silk from "@/components/sections/Silk";
+import SilkWrapper from "@/components/layout/auth/SilkWrapper";
 import { ReactNode } from "react";
 
 interface AuthLayoutProps {
@@ -16,15 +15,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
                     </div>
                 </div>
             </div>
-            <div className="bg-muted relative hidden lg:block">
-                <Silk
-                    speed={5}
-                    scale={1}
-                    color="#2563EB"
-                    noiseIntensity={1.5}
-                    rotation={0}
-                />
-            </div>
+            <SilkWrapper />
         </div>
     );
 }

@@ -148,3 +148,4 @@ const Silk: React.FC<SilkProps> = ({ speed = 5, scale = 1, color = '#7B7481', no
 };
 
 export default Silk;
+
