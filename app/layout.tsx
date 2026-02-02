@@ -16,6 +16,30 @@ export const metadata: Metadata = {
   },
   description: "AI-Powered Freelance and Portfolio Platform for freelancers and portfolio builders",
 
+  openGraph: {
+    title: 'Hirely - AI-Powered Freelance and Portfolio Platform',
+    description: "AI-Powered Freelance and Portfolio Platform for freelancers and portfolio builders",
+    url: '/',
+    siteName: 'Hirely',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Hirely',
+      },
+    ],
+  },
+  twitter: {
+    title: 'Hirely - AI-Powered Freelance and Portfolio Platform',
+    description: "AI-Powered Freelance and Portfolio Platform for freelancers and portfolio builders",
+    card: 'summary_large_image',
+    site: '@hirely',
+    creator: '@hirely',
+    images: ['/og-image.png'],
+  },
 };
 
 export default function RootLayout({
