@@ -9,15 +9,19 @@ interface IProps {
     className?: string;
     variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
     size?: "default" | "icon" | "xs" | "sm" | "lg" | "icon-xs" | "icon-sm" | "icon-lg" | null | undefined
+    onClick?: () => void;
+    type?: "button" | "submit" | "reset" | undefined;
+    disabled?: boolean;
 }
-const SubmitButton = ({ title, isLoading, icon, className, variant = 'default', size = 'default' }: IProps) => {
+const SubmitButton = ({ title, isLoading, icon, className, variant = 'default', size = 'default', onClick, type = 'button', disabled = false }: IProps) => {
     return <>
         <Button
-            disabled={isLoading}
+            disabled={isLoading || disabled}
             className={`w-full font-semibold rounded-full cursor-pointer ${className || ''}`}
             variant={variant}
-            type="submit"
+            type={type}
             size={size}
+            onClick={onClick}
         >
             {icon && icon}
             {title}

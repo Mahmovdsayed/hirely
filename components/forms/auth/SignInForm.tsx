@@ -22,7 +22,7 @@ const SignInForm = () => {
     });
 
     return <>
-        <form onSubmit={onSubmit} className="p-6 md:p-8">
+        <form onSubmit={onSubmit}>
             <FieldGroup>
                 <InputMotion delay={0.1} isFullWidth>
                     <div className="flex flex-col lg:mb-4 gap-2 text-start">
@@ -74,6 +74,8 @@ const SignInForm = () => {
                         isLoading={loading}
                         icon={<LogIn />}
                         size={"lg"}
+                        type="submit"
+                        disabled={loading || !formState.isValid}
                     />
                 </InputMotion>
                 <div className="flex flex-col gap-2">

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers/Providers";
 
-const montserrat = Montserrat({
-  subsets: ['latin'],
+const inter = Inter({
+  subsets: ["latin"],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-montserrat',
+  variable: '--font-inter',
 });
 
 export const metadata: Metadata = {
@@ -50,7 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning dir="ltr" lang="en" className="light">
-      <body className={`${montserrat.variable} antialiased overflow-x-hidden font-montserrat`}>
+      <body className={`${inter.variable} antialiased overflow-x-hidden font-inter`}>
         <Providers>
           {children}
         </Providers>

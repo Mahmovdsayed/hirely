@@ -22,7 +22,7 @@ const InputMotion = ({ children, delay, isFullWidth = false }: IProps) => {
                 opacity: 1,
                 filter: 'blur(0px)',
                 y: 0,
-                duration: 0.5,
+                duration: 0.4,
                 delay,
                 ease: "power1.inOut",
             }
