@@ -119,7 +119,7 @@ const SignUpForm = ({ roleId }: IProps) => {
                 </InputMotion>
                 <div className="flex flex-col gap-2">
                     <InputMotion delay={0.9} isFullWidth>
-                        <p className="text-sm text-start text-muted-foreground">
+                        <p className="text-sm text-left text-muted-foreground">
                             Already have an account?{' '}
                             <button
                                 type="button"
@@ -131,7 +131,7 @@ const SignUpForm = ({ roleId }: IProps) => {
                         </p>
                     </InputMotion>
                     <InputMotion delay={1} isFullWidth>
-                        <p className="text-xs text-start text-muted-foreground">
+                        <p className="text-xs text-left text-muted-foreground">
                             By signing up, you agree to our{' '}
                             <button
                                 type="button"

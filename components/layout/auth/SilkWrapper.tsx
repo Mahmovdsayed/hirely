@@ -35,11 +35,10 @@ const SilkWrapper = () => {
         <div className="relative hidden xl:flex h-full overflow-hidden border-r border-white/5 flex-col p-12 bg-black">
             <div className="absolute inset-0 z-0">
                 <Silk
-                    color="#7f22fe"
+                    color="#242027"
                     speed={6.5}
-                    noiseIntensity={2.5}
+                    noiseIntensity={1.5}
                 />
-                <div className="absolute bg-black/10 inset-0  shadow-inner" />
             </div>
 
             <div className="relative z-10 flex flex-col h-full">

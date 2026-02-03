@@ -58,7 +58,7 @@ const SignUpPage = () => {
     return (
         <div>
             <div className="container max-w-5xl mx-auto">
-                <div className="text-start mb-8 md:mb-12">
+                <div className="text-left mb-8 md:mb-12">
                     <InputMotion delay={0.1}>
                         <h1 className="text-2xl md:text-4xl font-bold tracking-tight mb-2 md:mb-3">
                             Start your journey
@@ -80,7 +80,7 @@ const SignUpPage = () => {
 
                 <div className="relative mt-4 md:mt-8">
                     <StepWrapper isVisible={step === 0}>
-                        <div className="mb-6 md:mb-10 text-start md:text-left">
+                        <div className="mb-6 md:mb-10 text-left">
                             <InputMotion delay={0.4}>
                                 <h2 className="text-xl md:text-2xl font-semibold mb-1 md:mb-2">Select your goal</h2>
                             </InputMotion>
@@ -135,8 +135,8 @@ const SignUpPage = () => {
 
                     <StepWrapper isVisible={step === 1}>
                         <div className="">
-                            <div className="mb-6 md:mb-8 flex items-center gap-3">
-                                <InputMotion isFullWidth delay={0.1}>
+                            <div className="mb-6 md:mb-8 flex items-center gap-3 w-full">
+                                <InputMotion delay={0.1}>
                                     <Button
                                         variant="outline"
                                         size="icon"
@@ -146,12 +146,12 @@ const SignUpPage = () => {
                                         <ChevronLeft size={18} />
                                     </Button>
                                 </InputMotion>
-                                <div className='text-start w-full'>
+                                <div className='text-left flex-1 min-w-0'>
                                     <InputMotion isFullWidth delay={0.2}>
-                                        <h2 className="text-xl md:text-2xl font-semibold">Account details</h2>
+                                        <h2 className="text-xl md:text-2xl font-semibold truncate">Account details</h2>
                                     </InputMotion>
                                     <InputMotion isFullWidth delay={0.3}>
-                                        <p className="text-muted-foreground text-xs md:text-sm">
+                                        <p className="text-muted-foreground text-xs md:text-sm truncate">
                                             Signing up as <span className="text-primary font-semibold capitalize">{role}</span>
                                         </p>
                                     </InputMotion>

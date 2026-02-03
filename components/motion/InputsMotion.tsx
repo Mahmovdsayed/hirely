@@ -32,7 +32,7 @@ const InputMotion = ({ children, delay, isFullWidth = false }: IProps) => {
     return (
         <div
             ref={elRef}
-            className={`w-full ${isFullWidth ? 'md:w-auto' : ''}`}
+            className={`${isFullWidth ? 'w-full' : 'w-auto'}`}
         >
             {children}
         </div>

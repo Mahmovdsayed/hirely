@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const LoadingScreen = () => {
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background">
+        <div className="fixed inset-0 z-100 flex items-center justify-center bg-background">
             <div className="relative flex flex-col items-center">
                 <motion.div
                     animate={{
