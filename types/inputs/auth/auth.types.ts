@@ -21,4 +21,22 @@ interface ResendOtpCodeType {
   email: string;
 }
 
-export type { SignInType, SignUpType, VerifyEmailOTPType, ResendOtpCodeType };
+interface ForgotPasswordType {
+  email: string;
+}
+
+interface ResetPasswordType {
+  email: string;
+  token: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export type {
+  SignInType,
+  SignUpType,
+  VerifyEmailOTPType,
+  ResendOtpCodeType,
+  ForgotPasswordType,
+  ResetPasswordType,
+};

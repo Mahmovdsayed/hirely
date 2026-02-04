@@ -1,6 +1,8 @@
 import { axiosInstance } from "@/helpers/axios";
 import {
+  ForgotPasswordType,
   ResendOtpCodeType,
+  ResetPasswordType,
   SignInType,
   SignUpType,
   VerifyEmailOTPType,
@@ -36,6 +38,24 @@ export const verifyEmailOTPService = async (payload: VerifyEmailOTPType) => {
 export const resendOtpCodeService = async (payload: ResendOtpCodeType) => {
   try {
     const { data } = await axiosInstance.post("/auth/resend-otp", payload);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const forgotPasswordService = async (payload: ForgotPasswordType) => {
+  try {
+    const { data } = await axiosInstance.post("/auth/forgot-password", payload);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const resetPasswordService = async (payload: ResetPasswordType) => {
+  try {
+    const { data } = await axiosInstance.post("/auth/reset-password", payload);
     return data;
   } catch (error) {
     throw error;
