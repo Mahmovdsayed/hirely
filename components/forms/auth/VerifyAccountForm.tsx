@@ -1,12 +1,11 @@
 'use client';
 
 import InputMotion from "@/components/motion/InputsMotion";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp"
 import SubmitButton from "@/components/ui/SubmitButton";
-import { LucideVerified, RefreshCwIcon } from "lucide-react";
+import { LucideVerified } from "lucide-react";
 import FormField from "../FormField";
 import { verifyEmailOTPService } from "@/services/auth/auth.service";
 import { VerifyEmailOTPType } from "@/types/inputs/auth/auth.types";
@@ -16,6 +15,7 @@ import { ConfettiFireworks } from "@/functions/ConfettiFireworks";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import AlertWrapper from "@/components/ui/AlertWrapper";
+import ResendOTP from "./ResendOTP";
 
 interface IProps {
     email?: string;
@@ -36,7 +36,7 @@ const VerifyAccountForm = ({ email }: IProps) => {
         onError: (err) => console.error(err),
     });
 
-    useEffect(() => { if (email) setValue("email", email, { shouldValidate: true })}, [email, setValue]);
+    useEffect(() => { if (email) setValue("email", email, { shouldValidate: true }) }, [email, setValue]);
 
     return <>
         <form onSubmit={onSubmit}>
@@ -58,10 +58,7 @@ const VerifyAccountForm = ({ email }: IProps) => {
                                     <FieldLabel htmlFor="otp-verification">
                                         Verification code
                                     </FieldLabel>
-                                    <Button variant="outline" size="xs">
-                                        <RefreshCwIcon />
-                                        Resend Code
-                                    </Button>
+                                    <ResendOTP email={email} />
                                 </div>
                                 {!email && <div className="mt-2 mb-1">
                                     <FormField
@@ -111,7 +108,7 @@ const VerifyAccountForm = ({ email }: IProps) => {
                         <CardFooter>
                             <Field>
                                 <SubmitButton
-                                    title="Verify Account"
+                                    title={loading ? "Verifying..." : "Verify Account"}
                                     size="lg"
                                     type="submit"
                                     isLoading={loading}

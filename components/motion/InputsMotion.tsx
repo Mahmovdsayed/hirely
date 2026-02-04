@@ -7,14 +7,14 @@ interface IProps {
     children: React.ReactNode
     delay: number
     isFullWidth?: boolean
+    isMotionDisabled?: boolean
 }
 
-const InputMotion = ({ children, delay, isFullWidth = false }: IProps) => {
+const InputMotion = ({ children, delay, isFullWidth = false, isMotionDisabled = false }: IProps) => {
     const elRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
-        if (!elRef.current) return
-
+        if (!elRef.current || isMotionDisabled) return
         gsap.fromTo(
             elRef.current,
             { opacity: 0, y: 20, filter: 'blur(5px)' },

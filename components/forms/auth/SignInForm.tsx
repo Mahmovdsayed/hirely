@@ -80,14 +80,24 @@ const SignInForm = () => {
                 </InputMotion>
                 <div className="flex flex-col gap-2">
                     <InputMotion delay={0.8} isFullWidth>
-                        <p className="text-sm text-start text-muted-foreground">
+                        <p className="text-xs text-start text-muted-foreground">
                             Don't have an account?{' '}
                             <button
                                 type="button"
                                 onClick={() => router.push('/auth/sign-up')}
-                                className="text-primary font-medium hover:underline"
+                                className="text-primary font-semibold underline"
                             >
                                 Sign Up
+                            </button>
+                             {" "},
+                            <br />
+                            {' '}Need to verify your email?{' '}
+                            <button
+                                type="button"
+                                onClick={() => router.push('/auth/verify')}
+                                className="text-primary font-semibold underline"
+                            >
+                                Verify Account
                             </button>
                         </p>
                     </InputMotion>
@@ -96,14 +106,14 @@ const SignInForm = () => {
                             By signing in, you agree to our{' '}
                             <button
                                 type="button"
-                                className="text-primary font-medium hover:underline"
+                                className="text-primary font-medium underline"
                             >
                                 Terms of Service
                             </button>{' '}
                             and{' '}
                             <button
                                 type="button"
-                                className="text-primary font-medium hover:underline"
+                                className="text-primary font-medium underline"
                             >
                                 Privacy Policy
                             </button>.

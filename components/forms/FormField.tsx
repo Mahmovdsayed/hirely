@@ -21,6 +21,7 @@ interface IProps {
     error?: FieldError
     defaultValue?: string | number | readonly string[] | undefined
     className?: string
+    isMotionDisabled?: boolean
 }
 
 const FormField = ({
@@ -35,6 +36,7 @@ const FormField = ({
     error,
     defaultValue,
     className,
+    isMotionDisabled
 }: IProps) => {
     const [showPassword, setShowPassword] = useState(false)
 
@@ -42,7 +44,7 @@ const FormField = ({
     const inputType = isPassword && showPassword ? 'text' : type
 
     return (
-        <InputMotion delay={delay}>
+        <InputMotion isMotionDisabled={isMotionDisabled} delay={delay}>
             <Field>
                 <FieldLabel htmlFor={name}>{label}</FieldLabel>
 
