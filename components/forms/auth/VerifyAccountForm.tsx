@@ -20,6 +20,7 @@ import ResendOTP from "./ResendOTP";
 interface IProps {
     email?: string;
 }
+
 const VerifyAccountForm = ({ email }: IProps) => {
     const router = useRouter();
     const [otp, setOtp] = useState("");

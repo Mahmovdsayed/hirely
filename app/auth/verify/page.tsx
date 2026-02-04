@@ -25,7 +25,6 @@ interface VerifyPageProps {
 }
 
 
-
 const page = async ({ searchParams }: VerifyPageProps) => {
     const { email } = await searchParams;
     return (

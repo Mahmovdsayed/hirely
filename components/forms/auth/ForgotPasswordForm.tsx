@@ -52,9 +52,11 @@ const ForgotPasswordForm = () => {
                     />
                 </InputMotion>
             </FieldGroup>
-            <FieldDescription className="text-xs md:text-sm pt-2">
-                Please check your spam or junk folder if you don't see the email in your inbox after a few minutes.
-            </FieldDescription>
+            <InputMotion delay={0.5}>
+                <FieldDescription className="text-xs md:text-sm pt-2">
+                    Please check your spam or junk folder if you don't see the email in your inbox after a few minutes.
+                </FieldDescription>
+            </InputMotion>
         </form>
     </>;
 };
