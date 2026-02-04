@@ -30,6 +30,7 @@ const page = async ({ searchParams }: VerifyPageProps) => {
     return (
         <Suspense fallback={<VerifyAccountFormSkeleton />}>
             <VerifyAccountForm email={email} />
+        
         </Suspense>
     );
 }
