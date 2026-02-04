@@ -10,6 +10,7 @@ import { LogIn } from "lucide-react";
 import { useRouter } from "next/navigation";
 import FormField from "../FormField";
 import { signUpValidationSchema } from "@/validations/auth/signUpValidation";
+import { ConfettiFireworks } from "@/functions/ConfettiFireworks";
 
 interface IProps {
     roleId: string;
@@ -17,11 +18,15 @@ interface IProps {
 const SignUpForm = ({ roleId }: IProps) => {
     const router = useRouter();
 
+    const successFunction = (success: any) => {
+        ConfettiFireworks();
+        setTimeout(() => router.push(`/auth/verify?email=${success?.data?.email}`), 3000);
+    }
 
     const { register, formState, onSubmit, loading } = useFormHandler({
         schema: signUpValidationSchema,
         service: (data: SignUpType) => signUpService(data),
-        onSuccess: (success) => router.push(`/auth/verify?email=${success?.data?.email}`),
+        onSuccess: (success) => successFunction(success),
         onError: (err) => console.error(err),
     });
 

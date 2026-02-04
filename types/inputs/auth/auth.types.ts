@@ -12,5 +12,13 @@ interface SignUpType {
   lastName?: string;
   companyName?: string;
 }
+interface VerifyEmailOTPType {
+  email: string;
+  otp: string;
+}
 
-export type { SignInType, SignUpType };
+interface ResendOtpCodeType {
+  email: string;
+}
+
+export type { SignInType, SignUpType, VerifyEmailOTPType, ResendOtpCodeType };

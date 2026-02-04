@@ -6,7 +6,6 @@ export const metadata = {
     openGraph: {
         title: 'Sign In - Hirely',
         description: 'Sign in to your Hirely account to access your dashboard and manage your portfolio effectively.',
-        url: '/auth/signin',
         siteName: 'Hirely',
         locale: 'en_US',
         type: 'website',

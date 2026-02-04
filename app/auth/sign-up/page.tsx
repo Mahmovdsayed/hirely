@@ -6,7 +6,6 @@ export const metadata = {
     openGraph: {
         title: "Sign Up",
         description: "Create an account to join the platform and start working or hiring freelancers",
-        url: "https://hirely.com/auth/sign-up",
         siteName: "Hirely",
         locale: "en_US",
         type: "website",

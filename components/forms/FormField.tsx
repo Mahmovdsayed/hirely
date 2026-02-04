@@ -19,6 +19,8 @@ interface IProps {
     delay: number
     register: UseFormRegister<any>
     error?: FieldError
+    defaultValue?: string | number | readonly string[] | undefined
+    className?: string
 }
 
 const FormField = ({
@@ -31,6 +33,8 @@ const FormField = ({
     delay,
     register,
     error,
+    defaultValue,
+    className,
 }: IProps) => {
     const [showPassword, setShowPassword] = useState(false)
 
@@ -47,8 +51,9 @@ const FormField = ({
                         {...register(name)}
                         id={name}
                         type={inputType}
-                        className="rounded-full pr-10"
+                        className={`rounded-full pr-10 ${className || ''}`}
                         placeholder={placeholder}
+                        defaultValue={defaultValue}
                         autoComplete={autoComplete}
                         required
                     />
