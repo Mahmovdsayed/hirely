@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Hirely — AI-Powered Freelance & Portfolio Platform
 
-## Getting Started
+**Hirely** is a state-of-the-art, AI-driven ecosystem designed to bridge the gap between world-class freelancers and forward-thinking companies. Built with a focus on premium aesthetics, seamless user experience, and cutting-edge technology, Hirely redefined how professionals showcase their work and how businesses find talent.
 
-First, run the development server:
+---
+
+## ✨ Key Features
+
+- **🤖 AI-Enhanced Matchmaking**: Smart algorithms that connect the right talent with the right opportunities.
+- **🎨 Dynamic AI Portfolios**: Automatically generated and optimized portfolios for freelancers.
+- **🔐 Multi-Role Authentication**: Dedicated onboarding flows for **Freelancers**, **Clients**, and **Companies**.
+- **📊 Interactive Dashboard**: Real-time analytics, project tracking, and management tools.
+- **🌐 Multilingual Support**: Fully localized interface for a global reach.
+- **⚡ Ultra-Performance**: Built with Next.js 16 and Bun for lightning-fast load times.
+- **🎭 Premium UI/UX**: Motion-rich interface using Framer Motion and GSAP for a world-class feel.
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/) & [GSAP](https://gsap.com/)
+- **Components**: [Radix UI](https://www.radix-ui.com/) & [Shadcn UI](https://ui.shadcn.com/)
+
+### State & Data
+
+- **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/) with [Redux Persist](https://github.com/rt2zz/redux-persist)
+- **Data Fetching**: [TanStack Query (React Query)](https://tanstack.com/query/latest)
+- **API Client**: [Axios](https://axios-http.com/)
+- **Backend Framework**: [Hono](https://hono.dev/)
+
+### Tools & Others
+
+- **Runtime**: [Bun](https://bun.sh/)
+- **Forms**: [React Hook Form](https://react-hook-form.com/) with [Zod](https://zod.dev/) validation
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Notifications**: [Sonner](https://sonner.stevenly.me/)
+
+---
+
+## 📁 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+hirely-client/
+├── app/                # Next.js App Router (Pages, Actions, API)
+├── components/         # Atomic UI Components & Layouts
+│   ├── forms/          # Specialized Form Components
+│   ├── ui/             # Reusable Shadcn/Radix components
+│   ├── pages/          # Page-specific complex components
+│   └── motion/         # Animation wrappers
+├── redux/              # Global State Management
+├── hooks/              # Custom React Hooks
+├── lib/                # Third-party library configurations
+├── services/           # API Service layers
+├── types/              # TypeScript Definitions
+├── validations/        # Zod Schemas
+└── public/             # Static Assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛡 License
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copyright (c) 2026 Hirely Team. All rights reserved.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is proprietary. Unauthorized use, reproduction, or distribution is strictly prohibited.
