@@ -1,3 +1,5 @@
+"use server";
+
 import { axiosInstance } from "@/helpers/axios";
 import {
   ForgotPasswordType,
@@ -7,6 +9,7 @@ import {
   SignUpType,
   VerifyEmailOTPType,
 } from "@/types/inputs/auth/auth.types";
+import { cookies } from "next/headers";
 
 export const signInService = async (payload: SignInType) => {
   try {
@@ -61,3 +64,4 @@ export const resetPasswordService = async (payload: ResetPasswordType) => {
     throw error;
   }
 };
+

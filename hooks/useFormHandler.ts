@@ -58,8 +58,6 @@ export function useFormHandler<T extends FieldValues>({
         responseData = res.data;
       }
 
-      console.log(responseData);
-
       if (responseData?.success ?? true) {
         toast.success(responseData?.message || "Success");
         form.reset();

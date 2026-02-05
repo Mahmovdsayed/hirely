@@ -10,14 +10,26 @@ import { LogIn } from "lucide-react";
 import { useRouter } from "next/navigation";
 import FormField from "../FormField";
 import { FieldGroup } from "@/components/ui/field";
+import axios from "axios";
 
 const SignInForm = () => {
     const router = useRouter();
 
+    const successFunction = async (token: string) => {
+        try {
+            
+            const { data } = await axios.post('/api/v1/userToken', { token })
+            if (data.success) router.push('/dashboard');
+
+        } catch (error) {
+            console.error("Error setting user token:", error);
+        }
+    }
+
     const { register, formState, onSubmit, loading } = useFormHandler({
         schema: signInValidationSchema,
         service: (data: SignInType) => signInService(data),
-        onSuccess: (success) => router.push('/dashboard'),
+        onSuccess: async (success) => await successFunction(success?.data?.accessToken),
         onError: (err) => console.error(err),
     });
 
@@ -89,7 +101,7 @@ const SignInForm = () => {
                             >
                                 Sign Up
                             </button>
-                             {" "},
+                            {" "},
                             <br />
                             {' '}Need to verify your email?{' '}
                             <button
