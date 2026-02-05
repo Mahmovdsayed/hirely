@@ -1,6 +1,6 @@
 'use client';
 
-import { Moon, Sun, Check, Settings } from "lucide-react"
+import { Moon, Sun, SunMoon } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -17,17 +17,17 @@ const ModeToggle = () => {
                     <span className="sr-only">Toggle theme</span>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-30 rounded-xl p-1 shadow-lg border-muted/50 backdrop-blur-md bg-background/80">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
+            <DropdownMenuContent align="end" className="w-30 rounded-3xl p-1 shadow-lg">
+                <DropdownMenuItem className="rounded-full font-medium" onClick={() => setTheme("light")}>
                     <Sun /> Light
                     {theme === 'light' && <div className="h-1.5 w-1.5 rounded-full bg-primary" />}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
+                <DropdownMenuItem className="rounded-full font-medium" onClick={() => setTheme("dark")}>
                     <Moon /> Dark
                     {theme === 'dark' && <div className="h-1.5 w-1.5 rounded-full bg-primary" />}
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                    <Settings /> System
+                <DropdownMenuItem className="rounded-full font-medium" onClick={() => setTheme("system")}>
+                    <SunMoon /> System
                     {theme === 'system' && <div className="h-1.5 w-1.5 rounded-full bg-primary" />}
                 </DropdownMenuItem>
             </DropdownMenuContent>

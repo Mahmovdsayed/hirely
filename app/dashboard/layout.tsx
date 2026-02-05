@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { AppSidebar } from "@/components/app-sidebar"
+import { AppSidebar } from "@/components/layout/dashboard/app-sidebar"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import DashboardHeader from "@/components/layout/dashboard/DashboardHeader";
 

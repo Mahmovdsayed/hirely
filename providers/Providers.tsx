@@ -6,7 +6,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect, useState } from "react";
 import { store } from "@/redux/store";
-import LoadingScreen from "@/components/layout/LoadingScreen";
+import LoadingScreen from "@/components/layout/loading/LoadingScreen";
 import { AnimatePresence } from "framer-motion";
 
 export function Providers({ children }: { children: React.ReactNode }) {
