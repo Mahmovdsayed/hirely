@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://www.hirely.cc' : 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://hirely.cc' : 'http://localhost:3000'),
   title: {
     default: 'Hirely - AI-Powered Freelance and Portfolio Platform',
     template: '%s | Hirely',

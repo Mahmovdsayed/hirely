@@ -1,7 +1,12 @@
+import TextHeader from "@/components/layout/dashboard/TextHeader";
 
 const page = () => {
     return <>
-        <h1>Dashboard Page</h1>
+        <TextHeader
+            title="Home Page"
+            description={"Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque iure, aliquam consectetur ea necessitatibus perferendis sapiente odit provident natus hic molestias, eius nihil in rerum atque nulla voluptatum accusamus! Repellendus?"}
+        
+        />
     </>;
 };
 

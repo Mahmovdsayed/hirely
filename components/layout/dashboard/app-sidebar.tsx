@@ -39,6 +39,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import Link from "next/link"
 
 const data = {
   user: {
@@ -47,30 +48,30 @@ const data = {
     avatar: "https://i.pinimg.com/736x/ad/f1/c1/adf1c19ed9550bbf5617416759ab6742.jpg",
   },
   navMain: [
-    { title: "Profile Management", url: "#", icon: User },
-    { title: "Skills Management", url: "#", icon: Sparkles },
-    { title: "Works Management", url: "#", icon: Briefcase },
-    { title: "Educations Management", url: "#", icon: GraduationCap },
-    { title: "Certificates Management", url: "#", icon: Award },
-    { title: "Projects Management", url: "#", icon: FolderKanban },
-    { title: "Contacts Management", url: "#", icon: Contact },
-    { title: "CV Management", url: "#", icon: FileText },
-    { title: "FAQ Management", url: "#", icon: HelpCircle },
-    { title: "Testimonials Management", url: "#", icon: MessageSquareQuote },
-    { title: "Services Management", url: "#", icon: Wrench },
-    { title: "Messages Management", url: "#", icon: Mail },
+    { title: "Profile Management", url: "/dashboard/profile", icon: User },
+    { title: "Skills Management", url: "/dashboard/skills", icon: Sparkles },
+    { title: "Works Management", url: "/dashboard/works", icon: Briefcase },
+    { title: "Educations Management", url: "/dashboard/educations", icon: GraduationCap },
+    { title: "Certificates Management", url: "/dashboard/certificates", icon: Award },
+    { title: "Projects Management", url: "/dashboard/projects", icon: FolderKanban },
+    { title: "Contacts Management", url: "/dashboard/contacts", icon: Contact },
+    { title: "CV Management", url: "/dashboard/cv", icon: FileText },
+    { title: "FAQ Management", url: "/dashboard/faq", icon: HelpCircle },
+    { title: "Testimonials Management", url: "/dashboard/testimonials", icon: MessageSquareQuote },
+    { title: "Services Management", url: "/dashboard/services", icon: Wrench },
+    { title: "Messages Management", url: "/dashboard/messages", icon: Mail },
   ],
   navSecondary: [
-    { title: "Support", url: "#", icon: LifeBuoy },
-    { title: "Analytics", url: "#", icon: PieChart },
-    { title: "Analysis", url: "#", icon: Map },
-    { title: "Feedback", url: "#", icon: MessageSquare },
+    { title: "Support", url: "/dashboard/support", icon: LifeBuoy },
+    { title: "Analytics", url: "/dashboard/analytics", icon: PieChart },
+    { title: "Feedback", url: "/dashboard/feedback", icon: MessageSquare },
   ],
 
   projects: [
-    { name: "Subscription", url: "#", icon: CreditCard },
-    { name: "Settings", url: "#", icon: Settings },
-    { name: "AI Assistant", url: "#", icon: Bot },
+    { name: "Subscription", url: "/dashboard/subscription", icon: Map },
+    { name: "Billing", url: "/dashboard/billing", icon: CreditCard },
+    { name: "Settings", url: "/dashboard/settings", icon: Settings },
+    { name: "AI Assistant", url: "/dashboard/ai-assistant", icon: Bot },
   ]
 }
 
@@ -81,7 +82,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <Link href="/dashboard">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Command className="size-4" />
                 </div>
@@ -89,7 +90,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <span className="truncate font-bold">Hirely</span>
                   <span className="truncate text-xs"><strong>Free</strong> Plan</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
