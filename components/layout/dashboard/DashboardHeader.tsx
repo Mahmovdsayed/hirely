@@ -13,6 +13,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import ModeToggle from './ModeToggle'
+import React from 'react'
 
 const DashboardHeader = () => {
     const pathname = usePathname()
@@ -28,37 +29,36 @@ const DashboardHeader = () => {
                     <BreadcrumbList>
                         <BreadcrumbItem>
                             <BreadcrumbLink asChild>
-                                <Link href="/dashboard" className="capitalize">
-                                    Dashboard
-                                </Link>
+                                <Link href="/dashboard">Dashboard</Link>
                             </BreadcrumbLink>
                         </BreadcrumbItem>
 
                         {segments.slice(1).map((segment, index) => {
-                            const href = `/dashboard/${segments
-                                .slice(1, index + 2)
-                                .join('/')}`
+                            const href = `/dashboard/${segments.slice(1, index + 2).join('/')}`
                             const isLast = index === segments.length - 2
 
                             return (
-                                <BreadcrumbItem key={href}>
+                                <React.Fragment key={href}>
                                     <BreadcrumbSeparator />
-                                    {isLast ? (
-                                        <BreadcrumbPage className="capitalize">
-                                            {segment}
-                                        </BreadcrumbPage>
-                                    ) : (
-                                        <BreadcrumbLink asChild>
-                                            <Link href={href} className="capitalize">
+                                    <BreadcrumbItem>
+                                        {isLast ? (
+                                            <BreadcrumbPage className="capitalize">
                                                 {segment}
-                                            </Link>
-                                        </BreadcrumbLink>
-                                    )}
-                                </BreadcrumbItem>
+                                            </BreadcrumbPage>
+                                        ) : (
+                                            <BreadcrumbLink asChild>
+                                                <Link href={href} className="capitalize">
+                                                    {segment}
+                                                </Link>
+                                            </BreadcrumbLink>
+                                        )}
+                                    </BreadcrumbItem>
+                                </React.Fragment>
                             )
                         })}
                     </BreadcrumbList>
                 </Breadcrumb>
+
             </div>
 
             <div className="flex items-center gap-2 px-4">
