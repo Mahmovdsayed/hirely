@@ -18,9 +18,9 @@ const SignInForm = () => {
     const router = useRouter();
     const dispatch = useAppDispatch()
 
-    const successFunction = async (token: string, user: UserStateTypes) => {
+    const successFunction = async (token: string, refreshToken: string, user: UserStateTypes) => {
         try {
-            const { data } = await axios.post('/api/v1/userToken', { token })
+            const { data } = await axios.post('/api/v1/userToken', { token, refreshToken })
             if (data.success) {
                 dispatch(setUser(user));
                 router.push('/dashboard')
@@ -34,7 +34,7 @@ const SignInForm = () => {
     const { register, formState, onSubmit, loading } = useFormHandler({
         schema: signInValidationSchema,
         service: (data: SignInType) => signInService(data),
-        onSuccess: async (success) => await successFunction(success?.data?.accessToken, success?.data?.user),
+        onSuccess: async (success) => await successFunction(success?.data?.accessToken, success?.data?.refreshToken, success?.data?.user),
         onError: (err) => console.error(err),
     });
 

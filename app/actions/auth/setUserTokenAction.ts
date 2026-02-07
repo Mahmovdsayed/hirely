@@ -6,6 +6,7 @@ import z from "zod";
 
 const userTokenValidation = z.object({
   token: z.string(),
+  refreshToken: z.string(),
 });
 
 type UserTokenValidation = z.infer<typeof userTokenValidation>;
@@ -13,7 +14,7 @@ type UserTokenValidation = z.infer<typeof userTokenValidation>;
 export const setUserTokenAction = async (c: Context) => {
   try {
     const body = (await c.req.json()) as UserTokenValidation;
-    const { token } = body;
+    const { token, refreshToken } = body;
 
     if (!token)
       return c.json({
@@ -22,6 +23,15 @@ export const setUserTokenAction = async (c: Context) => {
       });
 
     (await cookies()).set("token", token, {
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      httpOnly: true,
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+    });
+    
+    (await cookies()).set("refreshToken", refreshToken, {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       httpOnly: true,

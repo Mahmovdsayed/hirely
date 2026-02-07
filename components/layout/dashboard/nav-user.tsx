@@ -29,6 +29,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useAppDispatch } from "@/redux/hook"
+import { clearUser } from "@/redux/slices/user.slice"
+import { useRouter } from "next/navigation"
+import { logoutService } from "@/services/auth/auth.service"
+import { toast } from "sonner"
 
 export function NavUser({
   user,
@@ -40,6 +45,22 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const handleClick = async () => {
+    try {
+      const response = await logoutService();
+      if (response.success) {
+        toast.success(response.message);
+        router.push('/auth/sign-in')
+        dispatch(clearUser())
+      }
+    } catch (error) {
+      toast.error("Error logging out");
+      console.error("Error logging out:", error);
+    }
+  }
 
   return (
     <SidebarMenu>
@@ -102,7 +123,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleClick}>
               <LogOut />
               Log out
             </DropdownMenuItem>
