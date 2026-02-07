@@ -18,7 +18,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         setMounted(true);
         const isMobile = ('ontouchstart' in window || navigator.maxTouchPoints > 0) && window.innerWidth < 768;
-        const delay = isMobile ? 800 : 1500;
+        const delay = isMobile ? 800 : 1000;
 
         const timer = setTimeout(() => {
             setLoading(false);

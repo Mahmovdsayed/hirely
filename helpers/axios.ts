@@ -9,3 +9,8 @@ export const axiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export const dashboardAxiosInstance = axios.create({
+  baseURL: `${serverURL}/api/v1`,
+  withCredentials: true,
+});
