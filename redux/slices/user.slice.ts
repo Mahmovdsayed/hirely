@@ -7,6 +7,7 @@ export interface UserStateTypes {
   id: string | null;
   email: string | null;
   userName: string | null;
+  avatar: string | null;
   role: UserRoles;
   plan: UserPlan;
 }
@@ -17,6 +18,7 @@ const initialState: UserStateTypes = {
   plan: null,
   role: null,
   userName: null,
+  avatar: null,
 };
 
 const userSlice = createSlice({
@@ -29,12 +31,10 @@ const userSlice = createSlice({
       state.plan = action.payload.plan;
       state.role = action.payload.role;
       state.userName = action.payload.userName;
+      state.avatar = action.payload.avatar;
     },
     updateUser(state, action: PayloadAction<Partial<UserStateTypes>>) {
       Object.assign(state, action.payload);
-    },
-    getUser(state) {
-      return state;
     },
     clearUser() {
       return initialState;
@@ -42,5 +42,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, updateUser, clearUser, getUser } = userSlice.actions;
+export const { setUser, updateUser, clearUser } = userSlice.actions;
 export default userSlice.reducer;

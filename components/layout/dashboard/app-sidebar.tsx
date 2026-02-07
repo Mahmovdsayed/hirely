@@ -40,13 +40,9 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
+import { useAppSelector } from "@/redux/hook"
 
 const data = {
-  user: {
-    name: "Mahmoud",
-    email: "mahmoud@hirely.cc",
-    avatar: "https://i.pinimg.com/736x/ad/f1/c1/adf1c19ed9550bbf5617416759ab6742.jpg",
-  },
   navMain: [
     { title: "Profile Management", url: "/dashboard/profile", icon: User },
     { title: "Skills Management", url: "/dashboard/skills", icon: Sparkles },
@@ -76,6 +72,12 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const userData = useAppSelector(state => state.user)
+  const user = {
+    name: userData.userName || "",
+    email: userData.email || "",
+    avatar: userData.avatar || "",
+  }
   return (
     <Sidebar variant="inset" collapsible="icon" {...props}>
       <SidebarHeader>
@@ -88,7 +90,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-bold">Hirely</span>
-                  <span className="truncate text-xs"><strong>Free</strong> Plan</span>
+                  <span className="truncate text-xs"><strong className="capitalize">{userData.plan}</strong> Plan</span>
                 </div>
               </Link>
             </SidebarMenuButton>
@@ -101,7 +103,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>
   )
