@@ -11,15 +11,20 @@ import { useRouter } from "next/navigation";
 import FormField from "../FormField";
 import { FieldGroup } from "@/components/ui/field";
 import axios from "axios";
+import { useAppDispatch } from "@/redux/hook";
+import { setUser, UserStateTypes } from "@/redux/slices/user.slice";
 
 const SignInForm = () => {
     const router = useRouter();
+    const dispatch = useAppDispatch()
 
-    const successFunction = async (token: string) => {
+    const successFunction = async (token: string, user: UserStateTypes) => {
         try {
-            
             const { data } = await axios.post('/api/v1/userToken', { token })
-            if (data.success) router.push('/dashboard');
+            if (data.success) {
+                dispatch(setUser(user));
+                router.push('/dashboard')
+            };
 
         } catch (error) {
             console.error("Error setting user token:", error);
@@ -29,7 +34,7 @@ const SignInForm = () => {
     const { register, formState, onSubmit, loading } = useFormHandler({
         schema: signInValidationSchema,
         service: (data: SignInType) => signInService(data),
-        onSuccess: async (success) => await successFunction(success?.data?.accessToken),
+        onSuccess: async (success) => await successFunction(success?.data?.accessToken, success?.data?.user),
         onError: (err) => console.error(err),
     });
 
