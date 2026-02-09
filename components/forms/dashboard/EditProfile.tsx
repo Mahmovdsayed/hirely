@@ -22,16 +22,26 @@ interface IProps {
 const EditProfile = ({ user, refetch }: IProps) => {
     const [open, setOpen] = useState(false);
 
-    const successFunction = () => {
-        setOpen(false);
-        refetch();
-    }
-
     const { register, formState, onSubmit, loading, control, reset } = useFormHandler({
         schema: editProfileValidationSchema,
         service: (data: ProfileType) => updateProfile(data),
-        onSuccess: (success) => successFunction(),
+        onSuccess: () => {
+            setOpen(false);
+            refetch();
+        },
         onError: (err) => console.error(err),
+        defaultValues: {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            birthday: user.birthday,
+            gender: user.gender,
+            positionName: user.positionName,
+            phone: user.phone,
+            country: user.country,
+            city: user.city,
+            nationality: user.nationality,
+            about: user.about,
+        }
     });
 
     useEffect(() => {
@@ -71,7 +81,6 @@ const EditProfile = ({ user, refetch }: IProps) => {
                                 autoComplete="given-name"
                                 register={register}
                                 error={formState.errors.firstName}
-                                defaultValue={user.firstName}
                                 delay={0.1}
                             />
                             <FormField
@@ -83,7 +92,6 @@ const EditProfile = ({ user, refetch }: IProps) => {
                                 autoComplete="family-name"
                                 register={register}
                                 error={formState.errors.lastName}
-                                defaultValue={user.lastName}
                                 delay={0.15}
                             />
                         </div>
@@ -95,7 +103,6 @@ const EditProfile = ({ user, refetch }: IProps) => {
                                 description="Your date of birth helps personalize your experience."
                                 control={control}
                                 error={formState.errors.birthday}
-                                defaultValue={user.birthday}
                                 delay={0.2}
                             />
                             <FormSelect
@@ -109,7 +116,6 @@ const EditProfile = ({ user, refetch }: IProps) => {
                                 ]}
                                 register={register}
                                 error={formState.errors.gender}
-                                defaultValue={user.gender}
                                 delay={0.2}
                             />
                         </div>
@@ -129,7 +135,6 @@ const EditProfile = ({ user, refetch }: IProps) => {
                             autoComplete="organization-title"
                             register={register}
                             error={formState.errors.positionName}
-                            defaultValue={user.positionName}
                             delay={0.25}
                         />
                     </FieldGroup>
@@ -150,7 +155,6 @@ const EditProfile = ({ user, refetch }: IProps) => {
                                 autoComplete="address-level2"
                                 register={register}
                                 error={formState.errors.city}
-                                defaultValue={user.city}
                                 delay={0.3}
                             />
                             <FormField
@@ -162,7 +166,6 @@ const EditProfile = ({ user, refetch }: IProps) => {
                                 autoComplete="country-name"
                                 register={register}
                                 error={formState.errors.country}
-                                defaultValue={user.country}
                                 delay={0.35}
                             />
                         </div>
@@ -174,7 +177,6 @@ const EditProfile = ({ user, refetch }: IProps) => {
                             description="Your citizenship or national identity."
                             register={register}
                             error={formState.errors.nationality}
-                            defaultValue={user.nationality}
                             delay={0.4}
                         />
                     </FieldGroup>
@@ -192,7 +194,6 @@ const EditProfile = ({ user, refetch }: IProps) => {
                             description="Write a short bio that highlights your expertise, achievements, and career goals."
                             register={register}
                             error={formState.errors.about}
-                            defaultValue={user.about}
                             delay={0.4}
                             rows={5}
                         />
@@ -212,7 +213,6 @@ const EditProfile = ({ user, refetch }: IProps) => {
                             autoComplete="tel"
                             register={register}
                             error={formState.errors.phone}
-                            defaultValue={user.phone}
                             delay={0.45}
                         />
                     </FieldGroup>

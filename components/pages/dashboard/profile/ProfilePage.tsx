@@ -6,12 +6,13 @@ import { useAppSelector } from "@/redux/hook";
 import { getUserProfile } from "@/services/dashboard/profile.service";
 import { ProfileType } from "@/types/dashboard/profile.types";
 import { useQuery } from "@tanstack/react-query";
-import { Briefcase, Calendar, Camera, Globe, MapPin, Phone, User } from "lucide-react";
+import { Briefcase, Calendar, Globe, MapPin, Phone, User } from "lucide-react";
 import Image from "next/image";
 import InfoCard from "./InfoCard";
 import EditProfile from "@/components/forms/dashboard/EditProfile";
 import InputMotion from "@/components/motion/InputsMotion";
 import { formatDateLong } from "@/functions/FormatDate";
+import UpdateAvatar from "@/components/forms/dashboard/UpdateAvatar";
 
 const ProfilePage = () => {
     const user = useAppSelector((state) => state.user);
@@ -34,7 +35,7 @@ const ProfilePage = () => {
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 mb-8">
                     <div className="flex items-start gap-6">
                         <div className="relative group">
-                            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-neutral-200 dark:border-neutral-800">
+                            <div className="border-4 border-neutral-200 dark:border-neutral-800 relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
                                 <Image
                                     src={profile?.avatar?.url || "/images/default-avatar.png"}
                                     alt={`${profile?.firstName} ${profile?.lastName}`}
@@ -42,13 +43,7 @@ const ProfilePage = () => {
                                     className="object-cover"
                                 />
                             </div>
-                            <button
-                                className="absolute bottom-0 right-0 p-2 rounded-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
-                                aria-label="Upload photo"
-                            >
-                                <Camera className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
-                            </button>
-                            <input type="file" accept="image/*" className="hidden" />
+                            <UpdateAvatar refetch={refetch} currentAvatar={profile?.avatar?.url || ""} />
                         </div>
 
                         <div className="flex flex-col gap-1 pt-2">

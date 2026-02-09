@@ -6,3 +6,14 @@ export const allowedExtensions = {
   image: ["jpg", "jpeg", "png", "webp", "svg", "heic"],
   document: ["pdf", "doc", "docx", "txt", "md"],
 };
+
+export const IMAGE_FILTERS = [
+  { name: "None", value: "none" },
+  { name: "Grayscale", value: "grayscale(100%)" },
+  { name: "Sepia", value: "sepia(100%)" },
+  { name: "Warm", value: "sepia(30%) saturate(140%) hue-rotate(-10deg)" },
+  { name: "Cool", value: "hue-rotate(30deg) saturate(120%)" },
+  { name: "Dramatic", value: "contrast(150%) brightness(80%)" },
+  { name: "B&W", value: "grayscale(100%) contrast(120%)" },
+  { name: "Vintage", value: "sepia(50%) contrast(110%) brightness(90%)" },
+];

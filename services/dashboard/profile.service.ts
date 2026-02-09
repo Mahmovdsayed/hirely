@@ -20,11 +20,36 @@ export const getUserProfile = async () => {
 
 export const updateProfile = async (payload: ProfileType) => {
   try {
-    const { data } = await dashboardAxiosInstance.patch("/profile/edit", payload, {
-      headers: {
-        Authorization: `Bearer ${await getUserToken()}`,
+    const { data } = await dashboardAxiosInstance.patch(
+      "/profile/edit",
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${await getUserToken()}`,
+        },
       },
-    });
+    );
+    return data.data;
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+export const updateAvatar = async (avatar: File) => {
+  try {
+    const formData = new FormData();
+    formData.append("avatar", avatar);
+
+    const { data } = await dashboardAxiosInstance.patch(
+      "/profile/update-avatar",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${await getUserToken()}`,
+          "Content-Type": "multipart/form-data",
+        },
+      },
+    );
     return data.data;
   } catch (error: any) {
     throw error;

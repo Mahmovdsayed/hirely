@@ -1,4 +1,5 @@
 import z from "zod";
+import { imageValidationSchema } from "../uploadImage.validation";
 
 export const editProfileValidationSchema = z.object({
   birthday: z
@@ -27,4 +28,11 @@ export const editProfileValidationSchema = z.object({
     .max(20, { message: "Last name must be at most 20 characters" }),
 });
 
+export const editProfileImageValidationSchema = z.object({
+  avatar: imageValidationSchema,
+});
+
 export type EditProfileRequest = z.infer<typeof editProfileValidationSchema>;
+export type EditProfileImageRequest = z.infer<
+  typeof editProfileImageValidationSchema
+>;
