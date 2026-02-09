@@ -3,7 +3,6 @@
 import { getUserToken } from "@/helpers/auth";
 import { dashboardAxiosInstance } from "@/helpers/axios";
 import { ProfileType } from "@/types/dashboard/profile.types";
-import { cookies } from "next/headers";
 
 export const getUserProfile = async () => {
   try {
@@ -29,7 +28,7 @@ export const updateProfile = async (payload: ProfileType) => {
         },
       },
     );
-    return data.data;
+    return data;
   } catch (error: any) {
     throw error;
   }
@@ -50,7 +49,23 @@ export const updateAvatar = async (avatar: File) => {
         },
       },
     );
-    return data.data;
+    return data;
+  } catch (error: any) {
+    throw error;
+  }
+};
+
+export const deleteProfileImage = async () => {
+  try {
+    const { data } = await dashboardAxiosInstance.delete(
+      "/profile/delete-avatar",
+      {
+        headers: {
+          Authorization: `Bearer ${await getUserToken()}`,
+        },
+      },
+    );
+    return data;
   } catch (error: any) {
     throw error;
   }

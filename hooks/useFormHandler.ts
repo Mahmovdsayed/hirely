@@ -10,7 +10,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosRequestConfig } from "axios";
 import { ZodTypeAny } from "zod";
 import { toast } from "sonner";
-
 interface UseFormHandlerOptions<T extends FieldValues> {
   schema: ZodTypeAny;
   endpoint?: string;
@@ -19,7 +18,6 @@ interface UseFormHandlerOptions<T extends FieldValues> {
   defaultValues?: DefaultValues<T>;
   onSuccess?: (data: any) => void;
   onError?: (error: any) => void;
-  payloadType?: "json" | "form-data";
 }
 
 export function useFormHandler<T extends FieldValues>({
@@ -30,7 +28,6 @@ export function useFormHandler<T extends FieldValues>({
   defaultValues,
   onSuccess,
   onError,
-  payloadType = "json",
 }: UseFormHandlerOptions<T>) {
   const [loading, setLoading] = useState(false);
 
@@ -45,46 +42,34 @@ export function useFormHandler<T extends FieldValues>({
     try {
       setLoading(true);
 
-      let payload: any = data;
-      let headers: AxiosRequestConfig["headers"] = {};
+      let responseData: any;
 
-      if (payloadType === "form-data") {
-        const formData = new FormData();
-
-        Object.entries(data).forEach(([key, value]) => {
-          if (value == null) return;
-
-          if (value instanceof File) {
-            formData.append(key, value);
-          } else if (value instanceof FileList) {
-            Array.from(value).forEach((file) => formData.append(key, file));
-          } else {
-            formData.append(key, String(value));
-          }
-        });
-
-        payload = formData;
-        headers = { "Content-Type": "multipart/form-data" };
+      if (service) {
+        const result = await service(data);
+        responseData = result;
+      } else {
+        if (!endpoint) throw new Error("No endpoint or service provided");
+        const config: AxiosRequestConfig = {
+          method,
+          url: endpoint,
+          data,
+        };
+        const res = await axios(config);
+        responseData = res.data;
       }
 
-      const res = service
-        ? await service(payload)
-        : await axios({
-            method,
-            url: endpoint!,
-            data: payload,
-            headers,
-          });
-
-      const responseData = res?.data ?? res;
-
-      toast.success(responseData?.message || "Success");
-      form.reset();
-      onSuccess?.(responseData);
+      if (responseData?.success ?? true) {
+        toast.success(responseData?.message || "Success");
+        form.reset();
+        onSuccess?.(responseData);
+      } else {
+        toast.error(responseData?.message || "Something went wrong");
+        onError?.(responseData);
+      }
     } catch (error: any) {
-      toast.error(
-        error?.response?.data?.message || error?.message || "Request failed",
-      );
+      const message =
+        error?.response?.data?.message || error?.message || "Request failed";
+      toast.error(message);
       onError?.(error);
     } finally {
       setLoading(false);

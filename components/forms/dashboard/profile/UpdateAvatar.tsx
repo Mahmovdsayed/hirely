@@ -21,6 +21,7 @@ import { compressImage } from "@/functions/compressImage";
 import { useFormHandler } from "@/hooks/useFormHandler";
 import { editProfileImageValidationSchema } from "@/validations/dashboard/editProfileValidation";
 import { IMAGE_FILTERS } from "@/constants/statics";
+import DeleteAvatar from "./DeleteAvatar";
 
 
 interface IProps {
@@ -127,25 +128,28 @@ const UpdateAvatar = ({ currentAvatar, refetch }: IProps) => {
 
                 <DialogFooter>
                     <div className="flex flex-col gap-2 items-center w-full">
-                        <Button
-                            type="button"
-                            onClick={onSubmit}
-                            disabled={!file || loading}
-                            size={"lg"}
-                            className="w-full rounded-4xl"
-                        >
-                            {loading ? (
-                                <div className="flex items-center gap-2">
-                                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                    Processing...
-                                </div>
-                            ) : (
-                                <div className="flex items-center gap-2">
-                                    <Save className="w-4 h-4" />
-                                    Save Changes
-                                </div>
-                            )}
-                        </Button>
+                        <div className="grid grid-cols-2 gap-2 w-full">
+                            <Button
+                                type="button"
+                                onClick={onSubmit}
+                                disabled={!file || loading}
+                                size={"lg"}
+                                className="rounded-4xl w-full"
+                            >
+                                {loading ? (
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                        Processing...
+                                    </div>
+                                ) : (
+                                    <div className="flex items-center gap-2">
+                                        <Save className="w-4 h-4" />
+                                        Save Changes
+                                    </div>
+                                )}
+                            </Button>
+                            <DeleteAvatar refetch={refetch} />
+                        </div>
                         <DialogClose asChild>
                             <Button type="button" variant="outline" className="w-full rounded-4xl">
                                 <X className="w-4 h-4 mr-2" /> Cancel

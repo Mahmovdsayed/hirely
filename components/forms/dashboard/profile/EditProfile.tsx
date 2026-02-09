@@ -8,11 +8,11 @@ import { FieldGroup } from "@/components/ui/field";
 import { useFormHandler } from "@/hooks/useFormHandler";
 import { editProfileValidationSchema } from "@/validations/dashboard/editProfileValidation";
 import { updateProfile } from "@/services/dashboard/profile.service";
-import FormField from "../FormField";
-import FormSelect from "../FormSelect";
-import FormDatePicker from "../FormDatePicker";
-import FormTextarea from "../FormTextarea";
-import { FormDrawer } from "../FormDrawer";
+import FormField from "../../FormField";
+import FormSelect from "../../FormSelect";
+import FormDatePicker from "../../FormDatePicker";
+import FormTextarea from "../../FormTextarea";
+import { FormDrawer } from "../../FormDrawer";
 
 interface IProps {
     user: ProfileType;

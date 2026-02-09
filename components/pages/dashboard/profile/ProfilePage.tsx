@@ -9,10 +9,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Briefcase, Calendar, Globe, MapPin, Phone, User } from "lucide-react";
 import Image from "next/image";
 import InfoCard from "./InfoCard";
-import EditProfile from "@/components/forms/dashboard/EditProfile";
+import EditProfile from "@/components/forms/dashboard/profile/EditProfile";
 import InputMotion from "@/components/motion/InputsMotion";
 import { formatDateLong } from "@/functions/FormatDate";
-import UpdateAvatar from "@/components/forms/dashboard/UpdateAvatar";
+import UpdateAvatar from "@/components/forms/dashboard/profile/UpdateAvatar";
 
 const ProfilePage = () => {
     const user = useAppSelector((state) => state.user);
