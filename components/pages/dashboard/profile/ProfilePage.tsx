@@ -5,7 +5,6 @@ import { Separator } from "@/components/ui/separator";
 import { useAppSelector } from "@/redux/hook";
 import { getUserProfile } from "@/services/dashboard/profile.service";
 import { ProfileType } from "@/types/dashboard/profile.types";
-import { useQuery } from "@tanstack/react-query";
 import { Briefcase, Calendar, Globe, MapPin, Phone, User } from "lucide-react";
 import Image from "next/image";
 import InfoCard from "./InfoCard";
@@ -13,20 +12,21 @@ import EditProfile from "@/components/forms/dashboard/profile/EditProfile";
 import InputMotion from "@/components/motion/InputsMotion";
 import { formatDateLong } from "@/functions/FormatDate";
 import UpdateAvatar from "@/components/forms/dashboard/profile/UpdateAvatar";
+import { useDispatch } from "react-redux";
+import { updateUser } from "@/redux/slices/user.slice";
+import { useAppQuery } from "@/hooks/useAppQuery";
 
 const ProfilePage = () => {
     const user = useAppSelector((state) => state.user);
-
-    const { data: profile, isLoading, refetch } = useQuery<ProfileType>({
+    const dispatch = useDispatch();
+    
+    const { data: profile, isLoading, refetch } = useAppQuery<ProfileType>({
         queryKey: ['profile-dashboard', user?.id],
         queryFn: getUserProfile,
-        staleTime: 0,
-        refetchInterval: 0,
-        refetchOnMount: true,
-        refetchOnWindowFocus: true,
         enabled: !!user?.id,
     });
 
+    if (profile?.avatar?.url) dispatch(updateUser({ avatar: profile.avatar.url }));
     if (!profile && isLoading) return <ProfileSkeleton />;
 
     return (

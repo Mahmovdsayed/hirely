@@ -6,7 +6,7 @@ import { Pencil } from "lucide-react";
 import { useState, useEffect } from "react";
 import { FieldGroup } from "@/components/ui/field";
 import { useFormHandler } from "@/hooks/useFormHandler";
-import { editProfileValidationSchema } from "@/validations/dashboard/editProfileValidation";
+import { editProfileValidationSchema } from "@/validations/dashboard/profile/editProfileValidation";
 import { updateProfile } from "@/services/dashboard/profile.service";
 import FormField from "../../FormField";
 import FormSelect from "../../FormSelect";

@@ -50,7 +50,7 @@ export function FormDrawer({
     return (
         <Drawer open={open} onOpenChange={onOpenChange} direction="right">
             {trigger && <DrawerTrigger asChild>{trigger}</DrawerTrigger>}
-            <DrawerContent className={cn("md:min-w-3/4 lg:min-w-1/2 min-w-full md:rounded-l-4xl bg-card", className)}>
+            <DrawerContent className={cn("md:min-w-3/4 lg:min-w-2/5 min-w-full md:rounded-l-4xl bg-card", className)}>
                 <DrawerHeader>
                     <DrawerTitle>{title}</DrawerTitle>
                     {description && <DrawerDescription>{description}</DrawerDescription>}

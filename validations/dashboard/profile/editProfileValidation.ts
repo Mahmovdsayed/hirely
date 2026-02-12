@@ -1,5 +1,5 @@
+import { imageValidationSchema } from "@/validations/uploadImage.validation";
 import z from "zod";
-import { imageValidationSchema } from "../uploadImage.validation";
 
 export const editProfileValidationSchema = z.object({
   birthday: z
