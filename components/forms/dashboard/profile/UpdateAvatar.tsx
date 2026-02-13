@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Camera, Save, X, Palette, ZoomIn, Check, RotateCw } from "lucide-react";
+import { Camera, Save, X, Palette } from "lucide-react";
 import {
     Dialog,
     DialogClose,
@@ -22,9 +22,7 @@ import { useFormHandler } from "@/hooks/useFormHandler";
 import { editProfileImageValidationSchema } from "@/validations/dashboard/profile/editProfileValidation";
 import { IMAGE_FILTERS } from "@/constants/statics";
 import DeleteAvatar from "./DeleteAvatar";
-import Cropper from 'react-easy-crop';
-import getCroppedImg from "@/functions/cropImage";
-import { Slider } from "@/components/ui/slider";
+import { ImageCropper } from "@/components/ui/image-cropper";
 
 
 interface IProps {
@@ -36,16 +34,7 @@ const UpdateAvatar = ({ currentAvatar, refetch }: IProps) => {
     const [file, setFile] = useState<File | undefined>();
     const [selectedFilter, setSelectedFilter] = useState("none");
     const [isOpen, setIsOpen] = useState(false);
-
     const [editingFileSrc, setEditingFileSrc] = useState<string | null>(null);
-    const [crop, setCrop] = useState({ x: 0, y: 0 });
-    const [zoom, setZoom] = useState(1);
-    const [rotation, setRotation] = useState(0);
-    const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null);
-
-    const onCropComplete = useCallback((croppedArea: any, croppedAreaPixels: any) => {
-        setCroppedAreaPixels(croppedAreaPixels);
-    }, []);
 
     const handleFileSelect = async (newFile?: File) => {
         if (!newFile) return;
@@ -56,23 +45,9 @@ const UpdateAvatar = ({ currentAvatar, refetch }: IProps) => {
         reader.readAsDataURL(newFile);
     };
 
-    const handleCropSave = async () => {
-        if (!editingFileSrc || !croppedAreaPixels) return;
-        try {
-            const croppedImage = await getCroppedImg(
-                editingFileSrc,
-                croppedAreaPixels,
-                rotation
-            );
-            if (croppedImage) {
-                setFile(croppedImage);
-                setEditingFileSrc(null);
-                setZoom(1);
-                setRotation(0);
-            }
-        } catch (e) {
-            console.error(e);
-        }
+    const handleCropSave = async (croppedImage: File) => {
+        setFile(croppedImage);
+        setEditingFileSrc(null);
     };
 
     const serviceFunc = async () => {
@@ -131,59 +106,11 @@ const UpdateAvatar = ({ currentAvatar, refetch }: IProps) => {
 
                 <div className="py-4 space-y-6 overflow-y-auto max-h-[70vh] px-1">
                     {editingFileSrc ? (
-                        <div className="flex flex-col gap-6">
-                            <div className="w-full h-[300px] bg-neutral-900 rounded-xl overflow-hidden shadow-inner border border-neutral-800 relative">
-                                <Cropper
-                                    image={editingFileSrc}
-                                    crop={crop}
-                                    zoom={zoom}
-                                    rotation={rotation}
-                                    aspect={1}
-                                    onCropChange={setCrop}
-                                    onCropComplete={onCropComplete}
-                                    onZoomChange={setZoom}
-                                    onRotationChange={setRotation}
-                                />
-                            </div>
-
-                            <div className="space-y-6 px-2">
-                                <div className="space-y-4">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                                            <ZoomIn className="w-4 h-4" />
-                                            <span>Zoom</span>
-                                        </div>
-                                        <span className="text-xs font-mono bg-secondary px-2 py-1 rounded-md">{Math.round(zoom * 10)}%</span>
-                                    </div>
-                                    <Slider
-                                        value={[zoom]}
-                                        min={1}
-                                        max={3}
-                                        step={0.1}
-                                        onValueChange={(value) => setZoom(value[0])}
-                                        className="py-2"
-                                    />
-                                </div>
-
-                                <div className="space-y-4">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                                            <RotateCw className="w-4 h-4" />
-                                            <span>Rotation</span>
-                                        </div>
-                                        <span className="text-xs font-mono bg-secondary px-2 py-1 rounded-md">{rotation}°</span>
-                                    </div>
-                                    <Slider
-                                        value={[rotation]}
-                                        min={0}
-                                        max={360}
-                                        step={1}
-                                        onValueChange={(value) => setRotation(value[0])}
-                                        className="py-2"
-                                    />
-                                </div>
-                            </div>
-                        </div>
+                        <ImageCropper
+                            imageSrc={editingFileSrc}
+                            onCropSave={handleCropSave}
+                            onCancel={() => setEditingFileSrc(null)}
+                        />
                     ) : (
                         <>
                             <div className="flex justify-center w-full">
@@ -229,28 +156,7 @@ const UpdateAvatar = ({ currentAvatar, refetch }: IProps) => {
                 </div>
 
                 <DialogFooter className="sm:justify-between gap-4">
-                    {editingFileSrc ? (
-                        <>
-                            <Button
-                                variant="ghost"
-                                onClick={() => {
-                                    setEditingFileSrc(null);
-                                    setZoom(1);
-                                    setRotation(0);
-                                }}
-                                className="rounded-4xl"
-                            >
-                                Cancel
-                            </Button>
-                            <Button
-                                onClick={handleCropSave}
-                                className="rounded-4xl gap-2 w-full sm:w-auto"
-                            >
-                                <Check className="w-4 h-4" />
-                                Apply Crop
-                            </Button>
-                        </>
-                    ) : (
+                    {editingFileSrc ? null : (
                         <div className="flex flex-col gap-2 items-center w-full">
                             <div className="grid grid-cols-2 gap-2 w-full">
                                 <DeleteAvatar refetch={refetch} />

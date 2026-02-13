@@ -1,14 +1,11 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAppSelector } from "@/redux/hook";
 import { getUserSkills } from "@/services/dashboard/skills.service";
 import SkillsCard from "./SkillsCard";
 import { SkillType } from "@/types/dashboard/skills.types";
 import { useAppQuery } from "@/hooks/useAppQuery";
 import SkillsSkeleton from "@/components/skeletons/dashboard/SkillsSkeleton";
-import { Button } from "@/components/ui/button";
-import { Bot, Check, Plus, Sparkles, TrendingUp, Zap } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import AddSkillsForm from "@/components/forms/dashboard/skills/AddSkillsForm";
 import SkillsAssistant from "../ai/SkillsAssistant";

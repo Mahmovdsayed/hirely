@@ -17,3 +17,32 @@ export const IMAGE_FILTERS = [
   { name: "B&W", value: "grayscale(100%) contrast(120%)" },
   { name: "Vintage", value: "sepia(50%) contrast(110%) brightness(90%)" },
 ];
+
+export const employmentTypes = [
+  "Full-time",
+  "Part-time",
+  "Contract",
+  "Internship",
+  "Freelance",
+  "Remote",
+  "Temporary",
+  "Casual",
+  "Volunteer",
+  "Self-Employed",
+  "Apprenticeship",
+  "Other",
+] as const;
+
+export const degreeTypes = [
+  "High School",
+  "Associate Degree",
+  "Bachelor's Degree",
+  "Master's Degree",
+  "Doctorate (PhD)",
+  "Professional Degree",
+  "Certificate",
+  "Diploma",
+  "Bootcamp",
+  "Online Course",
+  "Other",
+] as const;

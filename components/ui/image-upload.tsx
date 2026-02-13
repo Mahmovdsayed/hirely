@@ -87,6 +87,7 @@ export function ImageUpload({
             ) : (
                 <div
                     {...getRootProps()}
+                    onPointerDown={(e) => e.stopPropagation()}
                     className={cn(
                         "relative flex cursor-pointer flex-col items-center justify-center border-2 border-dashed border-neutral-300 bg-neutral-50 p-12 text-center transition hover:bg-neutral-100 dark:border-neutral-800 dark:bg-neutral-900/50 dark:hover:bg-neutral-900",
                         rounded,
