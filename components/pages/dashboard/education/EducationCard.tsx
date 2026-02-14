@@ -82,12 +82,12 @@ const EducationCard = ({ education, refetch }: IProps) => {
                         {education.gpa && (
                             <div className="space-y-1">
                                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">GPA</p>
-                                <p className="text-sm font-bold text-primary">{education.gpa} / 5.0</p>
+                                <p className="text-sm font-bold text-primary">{education.gpa}</p>
                             </div>
                         )}
                     </div>
                 )}
-
+                <Separator />
                 {education.description && (
                     <div className="space-y-2">
                         <div className="flex items-center gap-2 mb-2">
@@ -99,7 +99,7 @@ const EducationCard = ({ education, refetch }: IProps) => {
                         </p>
                     </div>
                 )}
-
+                <Separator />
                 {education.activities && education.activities.length > 0 && (
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ const EducationCard = ({ education, refetch }: IProps) => {
                         </ul>
                     </div>
                 )}
-
+                <Separator />
                 {education.achievements && education.achievements.length > 0 && (
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
@@ -131,7 +131,7 @@ const EducationCard = ({ education, refetch }: IProps) => {
                         </ul>
                     </div>
                 )}
-
+                <Separator />
                 {education.coursework && education.coursework.length > 0 && (
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
@@ -153,7 +153,7 @@ const EducationCard = ({ education, refetch }: IProps) => {
                 <EditEducationForm education={education} refetch={refetch} />
                 <DeleteButton
                     isIcon={false}
-                    title={`Delete Education`}
+                    title={`Delete`}
                     serviceFunc={() => deleteEducationService(education._id)}
                     refetch={refetch}
                     warningMessage={`Are you sure you want to delete your education record from ${education.institution}?`}

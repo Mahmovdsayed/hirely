@@ -29,6 +29,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
     const [open, setOpen] = useState(false);
     const [file, setFile] = useState<File | undefined>();
     const [editingFileSrc, setEditingFileSrc] = useState<string | null>(null);
+    const [isImageDeleted, setIsImageDeleted] = useState(false);
 
     const handleFileSelect = async (newFile?: File) => {
         if (!newFile) return;
@@ -37,11 +38,13 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
             setEditingFileSrc(reader.result as string);
         });
         reader.readAsDataURL(newFile);
+        setIsImageDeleted(false);
     };
 
     const handleCropSave = async (croppedImage: File) => {
         setFile(croppedImage);
         setEditingFileSrc(null);
+        setIsImageDeleted(false);
     };
 
     const serviceFunc = async (data: EducationValidationSchema) => {
@@ -60,17 +63,18 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
 
         if (data.startDate) formData.append("startDate", new Date(data.startDate).toISOString());
         if (data.endDate && !data.isCurrent) formData.append("endDate", new Date(data.endDate).toISOString());
-        
+
 
         if (file) {
             const compressedFile = await compressImage(file, "square");
-            if (compressedFile) formData.append("institutionImage", compressedFile);  
-        }
+            if (compressedFile) formData.append("institutionImage", compressedFile);
+        } else if (isImageDeleted) formData.append("institutionImage", "");
+
 
         if (data.achievements && data.achievements.length > 0) data.achievements.forEach(achievement => formData.append("achievements", achievement));
         if (data.activities && data.activities.length > 0) data.activities.forEach(activity => formData.append("activities", activity));
         if (data.coursework && data.coursework.length > 0) data.coursework.forEach(course => formData.append("coursework", course));
-        
+
         return editEducationService(education._id, formData);
     }
 
@@ -91,6 +95,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
             activities: education.activities || [],
             achievements: education.achievements || [],
             coursework: education.coursework || [],
+            aiCounter: education.aiCounter || 0,
         },
         onSuccess: () => {
             setOpen(false);
@@ -102,10 +107,29 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
     const isCurrent = watch("isCurrent");
 
     useEffect(() => {
-        if (isCurrent) {
-            setValue("endDate", null);
-        }
+        if (isCurrent) setValue("endDate", null);
     }, [isCurrent, setValue]);
+
+    useEffect(() => {
+        if (education) {
+            reset({
+                institution: education.institution,
+                degree: education.degree as any,
+                fieldOfStudy: education.fieldOfStudy,
+                location: education.location,
+                description: education.description,
+                isCurrent: education.isCurrent,
+                startDate: education.startDate ? new Date(education.startDate) : undefined,
+                endDate: education.endDate ? new Date(education.endDate) : undefined,
+                grade: education.grade,
+                gpa: education.gpa,
+                activities: education.activities || [],
+                achievements: education.achievements || [],
+                coursework: education.coursework || [],
+                aiCounter: education.aiCounter || 0,
+            } as any);
+        }
+    }, [education, reset]);
 
     return (
         <FormDrawer
@@ -119,6 +143,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                 if (!isOpen) {
                     setEditingFileSrc(null);
                     setFile(undefined);
+                    setIsImageDeleted(false);
                 }
             }}
             trigger={
@@ -142,9 +167,12 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                         ) : (
                             <div className="w-full max-w-xs">
                                 <ImageUpload
-                                    value={file || education.institutionImage?.url}
+                                    value={file || (isImageDeleted ? undefined : education.institutionImage?.url)}
                                     onChange={handleFileSelect}
-                                    onRemove={() => setFile(undefined)}
+                                    onRemove={() => {
+                                        setFile(undefined);
+                                        setIsImageDeleted(true);
+                                    }}
                                     rounded="rounded-2xl"
                                     className="aspect-square"
                                 />

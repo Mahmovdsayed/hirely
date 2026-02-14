@@ -29,6 +29,7 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
     const [open, setOpen] = useState(false);
     const [file, setFile] = useState<File | undefined>();
     const [editingFileSrc, setEditingFileSrc] = useState<string | null>(null);
+    const [isImageDeleted, setIsImageDeleted] = useState(false);
 
     const handleFileSelect = async (newFile?: File) => {
         if (!newFile) return;
@@ -37,11 +38,13 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
             setEditingFileSrc(reader.result as string);
         });
         reader.readAsDataURL(newFile);
+        setIsImageDeleted(false);
     };
 
     const handleCropSave = async (croppedImage: File) => {
         setFile(croppedImage);
         setEditingFileSrc(null);
+        setIsImageDeleted(false);
     };
 
     const serviceFunc = async (data: WorkValidationSchema) => {
@@ -55,18 +58,14 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
         formData.append("isCurrent", String(!!data.isCurrent));
         formData.append("aiCounter", String(data.aiCounter || 0));
 
-        if (data.startDate) {
-            formData.append("startDate", new Date(data.startDate).toISOString());
-        }
+        if (data.startDate) formData.append("startDate", new Date(data.startDate).toISOString());
+        if (data.endDate && !data.isCurrent) formData.append("endDate", new Date(data.endDate).toISOString());
 
-        if (data.endDate && !data.isCurrent) {
-            formData.append("endDate", new Date(data.endDate).toISOString());
-        }
 
         if (file) {
             const compressedFile = await compressImage(file, "square");
             if (compressedFile) formData.append("companyImage", compressedFile);
-        }
+        } else if (isImageDeleted) formData.append("companyImage", "");
 
         if (data.skills && data.skills.length > 0) data.skills.forEach(skill => formData.append("skills", skill));
         if (data.achievements && data.achievements.length > 0) data.achievements.forEach(achievement => formData.append("achievements", achievement));
@@ -90,6 +89,7 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
             skills: work.skills || [],
             achievements: work.achievements || [],
             responsibilities: work.responsibilities || [],
+            aiCounter: work.aiCounter || 0,
         },
         onSuccess: () => {
             setOpen(false);
@@ -101,10 +101,27 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
     const isCurrent = watch("isCurrent");
 
     useEffect(() => {
-        if (isCurrent) {
-            setValue("endDate", null);
-        }
+        if (isCurrent) setValue("endDate", null);
     }, [isCurrent, setValue]);
+
+    useEffect(() => {
+        if (work) {
+            reset({
+                companyName: work.companyName,
+                position: work.position,
+                employmentType: work.employmentType as any,
+                location: work.location,
+                description: work.description,
+                isCurrent: work.isCurrent,
+                startDate: work.startDate ? new Date(work.startDate) : undefined,
+                endDate: work.endDate ? new Date(work.endDate) : undefined,
+                skills: work.skills || [],
+                achievements: work.achievements || [],
+                responsibilities: work.responsibilities || [],
+                aiCounter: work.aiCounter || 0,
+            } as any);
+        }
+    }, [work, reset]);
 
     return (
         <FormDrawer
@@ -118,6 +135,7 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
                 if (!isOpen) {
                     setEditingFileSrc(null);
                     setFile(undefined);
+                    setIsImageDeleted(false);
                 }
             }}
             trigger={
@@ -141,9 +159,12 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
                         ) : (
                             <div className="w-full max-w-xs">
                                 <ImageUpload
-                                    value={file || work.companyImage?.url}
+                                    value={file || (isImageDeleted ? undefined : work.companyImage?.url)}
                                     onChange={handleFileSelect}
-                                    onRemove={() => setFile(undefined)}
+                                    onRemove={() => {
+                                        setFile(undefined);
+                                        setIsImageDeleted(true);
+                                    }}
                                     rounded="rounded-2xl"
                                     className="aspect-square"
                                 />

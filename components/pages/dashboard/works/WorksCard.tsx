@@ -17,7 +17,7 @@ interface IProps {
 }
 
 const WorksCard = ({ work, refetch }: IProps) => {
-    const formatDateLong = (date: string | Date | undefined) => {
+    const formatDate = (date: string | Date | undefined) => {
         if (!date) return "";
         return new Date(date).toLocaleDateString('en-US', {
             month: 'short',
@@ -61,7 +61,7 @@ const WorksCard = ({ work, refetch }: IProps) => {
 
                             <Badge variant="outline" className="text-xs">
                                 <Calendar className="w-3 h-3 mr-1" />
-                                {formatDateLong(work.startDate)} - {work.isCurrent ? 'Present' : formatDateLong(work.endDate)}
+                                {formatDate(work.startDate)} - {work.isCurrent ? 'Present' : formatDate(work.endDate)}
                                 <span className="mx-1">•</span>
                                 {calculateDuration(work.startDate, work.endDate, work.isCurrent)}
                             </Badge>
@@ -165,7 +165,7 @@ const WorksCard = ({ work, refetch }: IProps) => {
                 <EditWorksForm work={work} refetch={refetch} />
                 <DeleteButton
                     isIcon={false}
-                    title={`Delete Work`}
+                    title={`Delete`}
                     serviceFunc={() => deleteWorkService(work._id)}
                     refetch={refetch}
                     warningMessage={`Are you sure you want to delete your experience at ${work.companyName}? This action cannot be undone.`}

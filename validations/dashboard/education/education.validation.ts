@@ -20,11 +20,18 @@ export const educationValidationSchema = z
     ),
     isCurrent: z.boolean().default(false),
     grade: z.string().max(50).optional(),
-    gpa: z.preprocess((val) => {
-      if (val === "" || val === null || val === undefined) return undefined;
-      const num = Number(val);
-      return isNaN(num) ? undefined : num;
-    }, z.number().min(0).max(5.0).optional()),
+    gpa: z.preprocess(
+      (val) => {
+        if (val === "" || val === null || val === undefined) return undefined;
+        const num = Number(val);
+        return isNaN(num) ? undefined : num;
+      },
+      z
+        .number()
+        .min(0, { message: "GPA must be between 0 and 4.0" })
+        .max(4.0, { message: "GPA must be between 0 and 4.0" })
+        .optional(),
+    ),
     location: z.string().max(100).optional(),
     description: z.string().max(1000).optional(),
     activities: z.array(z.string()).optional(),
