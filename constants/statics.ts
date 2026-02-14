@@ -46,3 +46,24 @@ export const degreeTypes = [
   "Online Course",
   "Other",
 ] as const;
+
+export const certificateTypes = [
+  "course",
+  "certification",
+  "license",
+  "achievement",
+  "other",
+] as const;
+
+export const completionStatuses = [
+  "completed",
+  "in-progress",
+  "expired",
+] as const;
+
+export const courseLevels = [
+  "beginner",
+  "intermediate",
+  "advanced",
+  "expert",
+] as const;

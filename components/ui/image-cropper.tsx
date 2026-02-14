@@ -49,7 +49,16 @@ export function ImageCropper({
 
     return (
         <div className="flex flex-col gap-6 w-full" onPointerDown={(e) => e.stopPropagation()}>
-            <div className="w-full h-[300px] bg-neutral-900 rounded-xl overflow-hidden shadow-inner border border-neutral-800 relative">
+            <div className="w-full h-[350px] bg-neutral-950 rounded-[2rem] overflow-hidden shadow-2xl border border-neutral-800 relative">
+                {/* Ambient Background layer for the cropper */}
+                <div className="absolute inset-0 w-full h-full scale-125 blur-2xl opacity-20 pointer-events-none">
+                    <img
+                        src={imageSrc}
+                        alt=""
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+
                 <Cropper
                     image={imageSrc}
                     crop={crop}
@@ -60,6 +69,9 @@ export function ImageCropper({
                     onCropComplete={onCropComplete}
                     onZoomChange={setZoom}
                     onRotationChange={setRotation}
+                    classes={{
+                        containerClassName: "z-10",
+                    }}
                 />
             </div>
 

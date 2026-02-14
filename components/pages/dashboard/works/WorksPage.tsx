@@ -40,7 +40,7 @@ const WorksPage = () => {
             <Separator className="mb-8" />
 
             {works?.workCount > 0 ? (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
                     {works?.works?.map((work: any) => (
                         <WorksCard refetch={refetch} key={work._id} work={work} />
                     ))}

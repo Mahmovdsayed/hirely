@@ -18,7 +18,6 @@ const EducationPage = () => {
         queryFn: getUserEducations,
         enabled: !!user?.id,
     });
-    console.log(educationData)
 
     if (isLoading) return <EducationSkeleton />;
 
@@ -41,7 +40,7 @@ const EducationPage = () => {
             <Separator className="mb-8" />
 
             {educationData?.educationCount > 0 ? (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
                     {educationData?.educations?.map((edu: any) => (
                         <EducationCard refetch={refetch} key={edu._id} education={edu} />
                     ))}

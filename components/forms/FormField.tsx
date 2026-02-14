@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input'
 interface IProps {
     name: string
     label: string
-    type?: 'text' | 'email' | 'password'
+    type?: 'text' | 'email' | 'password' | 'date' | 'number' | 'file' | 'url' | 'select' | 'checkbox' | 'radio' | 'textarea' | 'range' | 'datetime-local' | 'month' | 'week' | 'time' | 'color' | 'image' | 'search' | 'tel' | 'hidden' | 'submit' | 'reset' | 'button' | 'color'
     placeholder?: string
     description?: string
     autoComplete?: string

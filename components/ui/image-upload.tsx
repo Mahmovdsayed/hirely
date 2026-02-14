@@ -14,6 +14,7 @@ interface ImageUploadProps {
     className?: string;
     rounded?: string;
     filter?: string;
+    aspect?: "square" | "video";
 }
 
 export function ImageUpload({
@@ -23,6 +24,7 @@ export function ImageUpload({
     className,
     rounded = "rounded-lg",
     filter = "none",
+    aspect = "square",
 }: ImageUploadProps) {
     const [preview, setPreview] = useState<string | null>(null);
 
@@ -66,7 +68,11 @@ export function ImageUpload({
     return (
         <div className={cn("w-full", className)}>
             {preview ? (
-                <div className={cn("relative aspect-square w-full overflow-hidden border border-neutral-200 dark:border-neutral-800", rounded)}>
+                <div className={cn(
+                    "relative w-full overflow-hidden border border-neutral-200 dark:border-neutral-800",
+                    aspect === "square" ? "aspect-square" : "aspect-video",
+                    rounded
+                )}>
                     <Button
                         type="button"
                         onClick={handleRemove}
@@ -76,11 +82,25 @@ export function ImageUpload({
                     >
                         <X className="h-4 w-4" />
                     </Button>
+                    {/* Layer 1: Blurred Background */}
+                    <div className="absolute inset-0 w-full h-full scale-110 blur-xl opacity-30">
+                        <Image
+                            fill
+                            src={preview}
+                            alt=""
+                            className="object-cover"
+                        />
+                    </div>
+
+                    {/* Layer 2: Black/Dark Tint Overlay */}
+                    <div className="absolute inset-0 bg-neutral-900/40" />
+
+                    {/* Layer 3: Main Centered Image */}
                     <Image
                         fill
                         src={preview}
                         alt="Upload preview"
-                        className="object-cover transition-all duration-300"
+                        className="object-contain transition-all duration-300 relative z-0"
                         style={{ filter }}
                     />
                 </div>
