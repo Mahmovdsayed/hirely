@@ -49,7 +49,6 @@ const CertificatesCard = ({ certificate, refetch }: IProps) => {
                 </div>
             </div>
 
-            {/* Description */}
             {certificate.description && (
                 <div>
                     <h4 className="text-sm font-medium mb-1">Description</h4>
