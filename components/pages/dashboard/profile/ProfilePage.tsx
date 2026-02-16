@@ -19,7 +19,7 @@ import { useAppQuery } from "@/hooks/useAppQuery";
 const ProfilePage = () => {
     const user = useAppSelector((state) => state.user);
     const dispatch = useDispatch();
-    
+
     const { data: profile, isLoading, refetch } = useAppQuery<ProfileType>({
         queryKey: ['profile-dashboard', user?.id],
         queryFn: getUserProfile,
@@ -38,7 +38,7 @@ const ProfilePage = () => {
                             <div className="border-4 border-neutral-200 dark:border-neutral-800 relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
                                 <Image
                                     src={profile?.avatar?.url || "/images/default-avatar.png"}
-                                    alt={`${profile?.firstName} ${profile?.lastName}`}
+                                    alt={`${profile?.firstName || ""} ${profile?.lastName || ""}`}
                                     fill
                                     className="object-cover"
                                 />
@@ -48,7 +48,7 @@ const ProfilePage = () => {
 
                         <div className="flex flex-col gap-1 pt-2">
                             <h1 className="text-xl md:text-2xl font-semibold text-foreground">
-                                {profile?.firstName} {profile?.lastName}
+                                {profile?.firstName || ""} {profile?.lastName || ""}
                             </h1>
                             <p className="text-sm text-muted-foreground font-medium">
                                 {user?.email}
