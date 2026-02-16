@@ -12,24 +12,24 @@ import { AnimatePresence } from "framer-motion";
 export function Providers({ children }: { children: React.ReactNode }) {
 
     const [queryClient] = useState(() => new QueryClient());
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-        setMounted(true);
-        const isMobile = ('ontouchstart' in window || navigator.maxTouchPoints > 0) && window.innerWidth < 768;
-        const delay = isMobile ? 800 : 1000;
+    // useEffect(() => {
+    //     setMounted(true);
+    //     const isMobile = ('ontouchstart' in window || navigator.maxTouchPoints > 0) && window.innerWidth < 768;
+    //     const delay = isMobile ? 800 : 1000;
 
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, delay);
+    //     const timer = setTimeout(() => {
+    //         setLoading(false);
+    //     }, delay);
 
-        return () => clearTimeout(timer);
-    }, []);
+    //     return () => clearTimeout(timer);
+    // }, []);
 
-    if (!mounted) {
-        return <LoadingScreen />;
-    }
+    // if (!mounted) {
+    //     return <LoadingScreen />;
+    // }
 
     return <>
         <AnimatePresence mode="sync">
