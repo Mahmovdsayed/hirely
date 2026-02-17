@@ -15,6 +15,7 @@ import UpdateAvatar from "@/components/forms/dashboard/profile/UpdateAvatar";
 import { useDispatch } from "react-redux";
 import { updateUser } from "@/redux/slices/user.slice";
 import { useAppQuery } from "@/hooks/useAppQuery";
+import { useEffect } from "react";
 
 const ProfilePage = () => {
     const user = useAppSelector((state) => state.user);
@@ -26,8 +27,11 @@ const ProfilePage = () => {
         enabled: !!user?.id,
     });
 
-    if (profile?.avatar?.url) dispatch(updateUser({ avatar: profile.avatar.url }));
-    if (!profile && isLoading) return <ProfileSkeleton />;
+    useEffect(() => {
+        if (profile?.avatar?.url) dispatch(updateUser({ avatar: profile.avatar.url }));
+    }, [profile?.avatar?.url, dispatch]);
+
+    if (!profile && isLoading && !user?.id) return <ProfileSkeleton />;
 
     return (
         <div className="w-full py-8">
@@ -60,7 +64,7 @@ const ProfilePage = () => {
                             )}
                         </div>
                     </div>
-                    <EditProfile user={profile!} refetch={refetch} />
+                    {profile && <EditProfile user={profile} refetch={refetch} />}
                 </div>
             </InputMotion>
 
@@ -122,7 +126,9 @@ const ProfilePage = () => {
                         <InfoCard
                             icon={<Calendar className="w-5 h-5" />}
                             label="Birthday"
-                            value={formatDateLong(profile?.birthday || "")}
+                            value={profile?.birthday
+                                ? formatDateLong(profile.birthday)
+                                : null}
                         />
                     </InputMotion>
                     <InputMotion delay={0.75} isFullWidth>
