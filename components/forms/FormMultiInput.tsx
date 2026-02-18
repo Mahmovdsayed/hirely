@@ -85,7 +85,7 @@ const FormMultiInput = <T extends FieldValues>({
                             {ArrayValues.map((value: string, index: number) => (
                                 <div
                                     key={`${value}-${index}`}
-                                    className="flex items-center gap-1.5 bg-secondary/50 border border-secondary text-secondary-foreground px-3 py-1.5 rounded-full text-sm group transition-all hover:bg-secondary hover:border-primary/30"
+                                    className="flex items-center gap-1.5 bg-secondary/50 border border-secondary text-secondary-foreground px-3 py-1.5 rounded-xl text-sm group transition-all hover:bg-secondary hover:border-primary/30"
                                 >
                                     <span>{value}</span>
                                     <button
@@ -102,7 +102,15 @@ const FormMultiInput = <T extends FieldValues>({
                 </div>
 
                 {description && <FieldDescription>{description}</FieldDescription>}
-                {error && <AlertWrapper errText={String(error.message)} />}
+                {error && (
+                    <AlertWrapper
+                        errText={
+                            error.message ||
+                            (Array.isArray(error) && error.find((e: any) => e?.message)?.message) ||
+                            "Invalid input"
+                        }
+                    />
+                )}
             </Field>
         </InputMotion>
     );

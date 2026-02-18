@@ -155,6 +155,7 @@ const AddWorksForm = ({ refetch }: IProps) => {
                                 register={register}
                                 error={formState.errors.companyName}
                                 delay={0.1}
+                                description="The official name of the company."
                             />
                             <FormField
                                 name="position"
@@ -165,6 +166,7 @@ const AddWorksForm = ({ refetch }: IProps) => {
                                 register={register}
                                 error={formState.errors.position}
                                 delay={0.15}
+                                description="Your job title at the company."
                             />
                         </div>
 
@@ -177,6 +179,7 @@ const AddWorksForm = ({ refetch }: IProps) => {
                                 error={formState.errors.employmentType}
                                 delay={0.2}
                                 defaultValue="Full-time"
+                                description="Type of your employment contract."
                             />
                             <FormField
                                 name="location"
@@ -186,6 +189,7 @@ const AddWorksForm = ({ refetch }: IProps) => {
                                 register={register}
                                 error={formState.errors.location}
                                 delay={0.25}
+                                description="Geographical location of the workplace."
                             />
                         </div>
 
@@ -196,6 +200,7 @@ const AddWorksForm = ({ refetch }: IProps) => {
                                 control={control}
                                 error={formState.errors.startDate}
                                 delay={0.3}
+                                description="When you began working here."
                             />
                             {!isCurrent && (
                                 <FormDatePicker
@@ -204,6 +209,7 @@ const AddWorksForm = ({ refetch }: IProps) => {
                                     control={control}
                                     error={formState.errors.endDate}
                                     delay={0.35}
+                                    description="When you stopped working here."
                                 />
                             )}
                         </div>

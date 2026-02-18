@@ -20,7 +20,10 @@ export const workValidationSchema = z.object({
     .trim()
     .min(1, { message: "Description cannot be empty" })
     .max(1000, { message: "Description cannot exceed 1000 characters" }),
-  isCurrent: z.boolean().optional().default(false),
+  isCurrent: z
+    .preprocess((val) => val === "true" || val === true, z.boolean())
+    .optional()
+    .default(false),
   employmentType: z.enum(employmentTypes).optional().default("Full-time"),
   location: z
     .string()
@@ -28,22 +31,40 @@ export const workValidationSchema = z.object({
     .max(100, { message: "Location cannot exceed 100 characters" })
     .optional(),
   achievements: z
-    .array(
-      z
-        .string()
-        .max(100, { message: "Achievement cannot exceed 100 characters" }),
+    .preprocess(
+      (val) => {
+        if (typeof val === "string") return [val];
+        return val;
+      },
+      z.array(
+        z
+          .string()
+          .max(300, { message: "Achievement cannot exceed 300 characters" }),
+      ),
     )
     .optional(),
   responsibilities: z
-    .array(
-      z
-        .string()
-        .max(100, { message: "Responsibility cannot exceed 100 characters" }),
+    .preprocess(
+      (val) => {
+        if (typeof val === "string") return [val];
+        return val;
+      },
+      z.array(
+        z
+          .string()
+          .max(300, { message: "Responsibility cannot exceed 300 characters" }),
+      ),
     )
     .optional(),
   skills: z
-    .array(
-      z.string().max(100, { message: "Skill cannot exceed 100 characters" }),
+    .preprocess(
+      (val) => {
+        if (typeof val === "string") return [val];
+        return val;
+      },
+      z.array(
+        z.string().max(300, { message: "Skill cannot exceed 300 characters" }),
+      ),
     )
     .optional(),
   companyImage: imageValidationSchema.optional(),

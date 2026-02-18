@@ -135,6 +135,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                             register={register}
                             error={formState.errors.name}
                             delay={0.1}
+                            description="Title of the certificate or course."
                         />
 
                         <FormField
@@ -144,6 +145,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                             register={register}
                             error={formState.errors.issuer}
                             delay={0.15}
+                            description="Organization that issued the certificate."
                         />
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -155,6 +157,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                 error={formState.errors.certificateType}
                                 delay={0.2}
                                 defaultValue={certificate.certificateType}
+                                description="Category of the credential."
                             />
 
                             <FormSelect
@@ -165,6 +168,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                 error={formState.errors.completionStatus}
                                 delay={0.25}
                                 defaultValue={certificate.completionStatus}
+                                description="Current status of the certification."
                             />
                         </div>
 
@@ -175,6 +179,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                 control={control}
                                 error={formState.errors.issueDate}
                                 delay={0.3}
+                                description="Date when the certificate was issued."
                             />
                         </div>
                     </FieldGroup>
@@ -193,6 +198,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                 register={register}
                                 error={formState.errors.courseName}
                                 delay={0.1}
+                                description="Specific name of the course taken."
                             />
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <FormField
@@ -202,6 +208,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                     register={register}
                                     error={formState.errors.courseProvider}
                                     delay={0.12}
+                                    description="Platform or institution providing the course."
                                 />
                                 <FormField
                                     name="instructor"
@@ -210,6 +217,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                     register={register}
                                     error={formState.errors.instructor}
                                     delay={0.14}
+                                    description="Name of the course instructor."
                                 />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -221,6 +229,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                     error={formState.errors.courseLevel}
                                     delay={0.15}
                                     defaultValue={certificate.courseDetails?.courseLevel}
+                                    description="Difficulty level of the course."
                                 />
                                 <FormField
                                     name="duration"
@@ -230,6 +239,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                     register={register}
                                     error={formState.errors.duration}
                                     delay={0.2}
+                                    description="Total time spent on the course in hours."
                                 />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -239,6 +249,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                     control={control}
                                     error={formState.errors.completionDate}
                                     delay={0.2}
+                                    description="Date when you finished the course."
                                 />
                                 <FormField
                                     name="courseUrl"
@@ -247,6 +258,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                     register={register}
                                     error={formState.errors.courseUrl}
                                     delay={0.25}
+                                    description="Link to the course page."
                                 />
                             </div>
                         </FieldGroup>
@@ -266,6 +278,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                 register={register}
                                 error={formState.errors.credentialId}
                                 delay={0.1}
+                                description="Unique identifier for your credential."
                             />
                             <FormField
                                 name="credentialUrl"
@@ -274,6 +287,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                                 register={register}
                                 error={formState.errors.credentialUrl}
                                 delay={0.15}
+                                description="Link to verify your credential."
                             />
                         </div>
                     </FieldGroup>
@@ -292,6 +306,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                             error={formState.errors.description}
                             delay={0.4}
                             rows={4}
+                            description="Summary of what you learned."
                         />
 
                         <FormMultiInput
@@ -303,6 +318,7 @@ const EditCertificateForm = ({ certificate, refetch }: IProps) => {
                             placeholder="e.g. Cloud Architecture, React Security"
                             error={formState.errors.skills}
                             delay={0.45}
+                            description="Specific skills acquired from this certification."
                         />
                     </FieldGroup>
                 </div>

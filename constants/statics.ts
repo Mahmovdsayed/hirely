@@ -67,3 +67,21 @@ export const courseLevels = [
   "advanced",
   "expert",
 ] as const;
+
+export const allowedPlatforms = [
+  "facebook",
+  "instagram",
+  "twitter",
+  "linkedIn",
+  "github",
+  "behance",
+  "dribbble",
+  "whatsapp",
+  "telegram",
+  "youtube",
+  "tiktok",
+  "discord",
+  "snapchat",
+  "pinterest",
+  "reddit",
+] as const;

@@ -123,7 +123,7 @@ const UpdateAvatar = ({ currentAvatar, refetch }: IProps) => {
                                     }}
                                     rounded="rounded-4xl"
                                     filter={selectedFilter}
-                                    className="max-w-[400px]"
+                                    className="max-w-100"
                                 />
                             </div>
 

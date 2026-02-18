@@ -196,6 +196,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                             register={register}
                             error={formState.errors.institution}
                             delay={0.1}
+                            description="Name of the university or school."
                         />
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -207,6 +208,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                                 error={formState.errors.degree}
                                 delay={0.15}
                                 defaultValue={education.degree}
+                                description="The degree you pursued (e.g., Bachelor's)."
                             />
 
                             <FormField
@@ -216,6 +218,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                                 register={register}
                                 error={formState.errors.fieldOfStudy}
                                 delay={0.2}
+                                description="Your major or main subject of study."
                             />
                         </div>
 
@@ -226,6 +229,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                                 control={control}
                                 error={formState.errors.startDate}
                                 delay={0.25}
+                                description="When you started your studies."
                             />
                             {!isCurrent && (
                                 <FormDatePicker
@@ -234,6 +238,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                                     control={control}
                                     error={formState.errors.endDate}
                                     delay={0.3}
+                                    description="When you graduated or expect to graduate."
                                 />
                             )}
                         </div>
@@ -260,6 +265,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                                 register={register}
                                 error={formState.errors.grade}
                                 delay={0.35}
+                                description="Your final grade or classification."
                             />
                             <FormField
                                 name="gpa"
@@ -268,6 +274,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                                 register={register}
                                 error={formState.errors.gpa}
                                 delay={0.4}
+                                description="Your Grade Point Average if applicable."
                             />
                         </div>
 
@@ -278,6 +285,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                             register={register}
                             error={formState.errors.location}
                             delay={0.45}
+                            description="City and country of the institution."
                         />
 
                         <FormTextarea
@@ -288,6 +296,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                             error={formState.errors.description}
                             delay={0.5}
                             rows={4}
+                            description="Additional details about your academic experience."
                         />
                     </FieldGroup>
                 </div>
@@ -306,6 +315,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                             placeholder="e.g. Student Union, Football Team"
                             error={formState.errors.activities}
                             delay={0.55}
+                            description="Clubs, teams, or societies you participated in."
                         />
                         <FormMultiInput
                             control={control}
@@ -316,6 +326,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                             placeholder="e.g. National Programming Contest Winner"
                             error={formState.errors.achievements}
                             delay={0.6}
+                            description="Academic awards or recognitions."
                         />
                         <FormMultiInput
                             control={control}
@@ -326,6 +337,7 @@ const EditEducationForm = ({ education, refetch }: IProps) => {
                             placeholder="e.g. Data Structures, Algorithms"
                             error={formState.errors.coursework}
                             delay={0.65}
+                            description="Key subjects or modules you completed."
                         />
                     </FieldGroup>
                 </div>

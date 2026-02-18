@@ -26,7 +26,7 @@ const WorksCard = ({ work, refetch }: IProps) => {
     };
 
     return (
-        <Card className="overflow-hidden rounded-4xl">
+        <Card className="rounded-4xl">
             <CardHeader className="pb-4">
                 <div className="flex flex-col sm:flex-row gap-4">
                     <Avatar className="h-16 w-16 rounded-xl shrink-0">

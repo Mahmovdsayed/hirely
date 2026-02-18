@@ -188,6 +188,7 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
                             register={register}
                             error={formState.errors.companyName}
                             delay={0.1}
+                            description="The official name of the company."
                         />
 
                         <FormField
@@ -197,6 +198,7 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
                             register={register}
                             error={formState.errors.position}
                             delay={0.15}
+                            description="Your job title at the company."
                         />
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -208,6 +210,7 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
                                 error={formState.errors.employmentType}
                                 delay={0.2}
                                 defaultValue={work.employmentType}
+                                description="Type of your employment contract."
                             />
 
                             <FormField
@@ -217,6 +220,7 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
                                 register={register}
                                 error={formState.errors.location}
                                 delay={0.25}
+                                description="Geographical location of the workplace."
                             />
                         </div>
 
@@ -227,6 +231,7 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
                                 control={control}
                                 error={formState.errors.startDate}
                                 delay={0.3}
+                                description="When you began working here."
                             />
                             {!isCurrent && (
                                 <FormDatePicker
@@ -235,6 +240,7 @@ const EditWorksForm = ({ work, refetch }: IProps) => {
                                     control={control}
                                     error={formState.errors.endDate}
                                     delay={0.35}
+                                    description="When you stopped working here."
                                 />
                             )}
                         </div>
