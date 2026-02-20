@@ -20,7 +20,6 @@ const ContactsPage = () => {
     });
 
     if (isLoading) return
-    console.log(contacts.socialLinks);
 
     return <>
         <div className="py-8">

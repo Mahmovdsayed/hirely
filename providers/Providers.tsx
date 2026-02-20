@@ -32,7 +32,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     }
 
     return <>
-        <AnimatePresence mode="sync">
+        <AnimatePresence mode="sync"> 
             {loading ? <LoadingScreen key="loading" /> :
                 <Provider store={store}>
                     <NextThemesProvider
